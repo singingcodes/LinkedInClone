@@ -3,8 +3,30 @@ import React from "react";
 import styled from "styled-components";
 import { BiPencil } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
+import { useState, useEffect } from "react";
 
 const MyProfile = () => {
+  const [profile, setProfile] = useState("");
+
+  useEffect(() => {
+    profileData();
+  }, []);
+
+  const profileData = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/me",
+      {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+        },
+      }
+    );
+    let profileData = await response.json();
+    console.log(profileData);
+    setProfile(profileData);
+  };
+
   return (
     <Wrapper>
       <Header>
@@ -20,11 +42,7 @@ const MyProfile = () => {
         </Container>
       </Header>
       <AvatarLogo>
-        <img
-          className="jumbotron-img"
-          src="https://placekitten.com/80/80"
-          alt="avatar"
-        />
+        <img className="jumbotron-img" src={profile.image} alt="avatar" />
       </AvatarLogo>
       <Body>
         <Container>
@@ -32,15 +50,15 @@ const MyProfile = () => {
             <Col md={8}>
               <div className="jumbotron-body">
                 <h3>
-                  Tunde Ednut
+                  {profile.name}
                   <span className="text-muted ml-1">(Him/He)</span>
                 </h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>{profile.bio}</p>
                 <p>
-                  <span className="text-muted"> Greater Manchester Area</span>
+                  <span className="text-muted"> {profile.area}</span>
                   <b>
                     <a href="asd#" target="_blank" className="ml-2">
-                      Contact Info
+                      {profile.username}
                     </a>
                   </b>
                 </p>
