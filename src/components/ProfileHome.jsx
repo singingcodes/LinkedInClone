@@ -1,12 +1,12 @@
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap";
 
-import MySideBar from "./MySideBar"
+import MySideBar from "./MySideBar";
 
-import MyProfile from "./MyProfile"
+import MyProfile from "./MyProfile";
 
 const ProfileHome = () => {
   return (
-    <Container>
+    <Container className="my-3">
       <Row>
         <Col md={8}>
           <MyProfile />
@@ -16,6 +16,6 @@ const ProfileHome = () => {
         </Col>
       </Row>
     </Container>
-  )
-}
-export default ProfileHome
+  );
+};
+export default ProfileHome;
