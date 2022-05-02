@@ -1,4 +1,4 @@
-import { Card, Row, Col, Image, Button, Container } from "react-bootstrap";
+import { Card, Row, Col, Image, Button } from "react-bootstrap"
 
 const MySideBar = (props) => {
   return (
@@ -497,7 +497,7 @@ const MySideBar = (props) => {
         </Card.Body>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default MySideBar;
+export default MySideBar
