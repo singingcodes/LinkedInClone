@@ -1,6 +1,28 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap"
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
-const MySideBar = (props) => {
+const MySideBar = () => {
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/",
+      {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+        },
+      }
+    );
+    let responseData = await response.json();
+    console.log(responseData);
+    setProfiles(responseData);
+  };
+
   return (
     <>
       <Card style={{ width: "18rem" }} className="mb-2">
@@ -26,221 +48,51 @@ const MySideBar = (props) => {
           <Card.Title className="font-weight-bold" style={{ fontSize: "16px" }}>
             People also viewed
           </Card.Title>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
+          {profiles.splice(0, 5).map((profile) => (
+            <Row key={profile._id}>
+              <Col sm={3}>
+                <Image
+                  src={profile.image}
+                  rounded
+                  alt="profile-picture"
+                  height="48px"
+                />
+              </Col>
+              <Col sm={9}>
+                <div>
+                  <h6
+                    className="font-weight-bold mb-0"
+                    style={{ fontSize: "14px", lineHeight: "1.4" }}
+                  >
                     {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
+                    {profile.name}
+                    <span className="text-muted font-weight-normal">
+                      {" "}
+                      <i class="bi bi-dot"></i> 2nd
+                    </span>
+                  </h6>
+                  <h6
+                    className="text-muted"
+                    style={{ fontSize: "13px", lineHeight: "1.4" }}
+                  >
                     {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
+                    {profile.title}
+                  </h6>
+                  <Button
+                    style={{
+                      borderRadius: "50px",
+                      fontSize: "16px",
+                      width: "100px",
+                    }}
+                    variant="outline-dark"
+                    className="font-weight-bold mb-2 text-muted p-1"
+                  >
+                    Connect
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          ))}
           <Row>
             <Col className="p-0">
               <hr></hr>
@@ -260,226 +112,56 @@ const MySideBar = (props) => {
 
       {/* people you may know starts here */}
 
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" }} className="mb-3">
         <Card.Body>
           <Card.Title className="font-weight-bold" style={{ fontSize: "16px" }}>
             People you may know
           </Card.Title>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
+          {profiles.splice(50, 5).map((profile) => (
+            <Row key={profile._id}>
+              <Col sm={3}>
+                <Image
+                  src={profile.image}
+                  rounded
+                  alt="profile-picture"
+                  height="48px"
+                />
+              </Col>
+              <Col sm={9}>
+                <div>
+                  <h6
+                    className="font-weight-bold mb-0"
+                    style={{ fontSize: "14px", lineHeight: "1.4" }}
+                  >
                     {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
+                    {profile.name}
+                    <span className="text-muted font-weight-normal">
+                      {" "}
+                      <i class="bi bi-dot"></i> 2nd
+                    </span>
+                  </h6>
+                  <h6
+                    className="text-muted"
+                    style={{ fontSize: "13px", lineHeight: "1.4" }}
+                  >
                     {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={3}>
-              <Image
-                src="/assests/profile-picture.png"
-                rounded
-                alt="profile-picture"
-                height="48px"
-              />
-            </Col>
-            <Col sm={9}>
-              <div>
-                <h6
-                  className="font-weight-bold mb-0"
-                  style={{ fontSize: "14px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Antony Lock
-                  <span className="text-muted font-weight-normal">
-                    {" "}
-                    <i class="bi bi-dot"></i> 2nd
-                  </span>
-                </h6>
-                <h6
-                  className="text-muted"
-                  style={{ fontSize: "13px", lineHeight: "1.4" }}
-                >
-                  {" "}
-                  Software Operations and Implemnetation at Kantar
-                </h6>
-                <Button
-                  style={{
-                    borderRadius: "50px",
-                    fontSize: "16px",
-                    width: "100px",
-                  }}
-                  variant="outline-dark"
-                  className="font-weight-bold mb-2 text-muted p-1"
-                >
-                  Connect
-                </Button>
-              </div>
-            </Col>
-          </Row>
+                    {profile.title}
+                  </h6>
+                  <Button
+                    style={{
+                      borderRadius: "50px",
+                      fontSize: "16px",
+                      width: "100px",
+                    }}
+                    variant="outline-dark"
+                    className="font-weight-bold mb-2 text-muted p-1"
+                  >
+                    Connect
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          ))}
           <Row>
             <Col className="p-0">
               <hr></hr>
@@ -497,7 +179,7 @@ const MySideBar = (props) => {
         </Card.Body>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default MySideBar
+export default MySideBar;
