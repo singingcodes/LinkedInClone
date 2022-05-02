@@ -11,12 +11,19 @@
   padding: 0;
 }
 /* NAvBar styles */
+#responsive-navbar-nav {
+
+ 
+  height: 30px;
+  
+ 
+}
 #responsive-navbar-nav .bi{
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
 }
 .search-class{
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 #responsive-navbar-nav p{
   font-size: 10px;
