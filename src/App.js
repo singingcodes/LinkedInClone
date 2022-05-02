@@ -1,4 +1,3 @@
-
 import "./App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-icons/font/bootstrap-icons.css"
@@ -7,20 +6,18 @@ import MyNavBar from "./components/MyNavBar"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MyFooter from "./components/MyFooter"
 
-
 const App = () => {
   return (
     <div className="linkedIn-body">
-     <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<MyNavBar />} />
         </Routes>
- <ProfileHome />
       </BrowserRouter>
+      <ProfileHome />
       <MyFooter />
     </div>
   )
 }
 
-
-export default App;
+export default App
