@@ -142,6 +142,7 @@ const Wrapper = styled.div`
   background-color: rgb(255, 255, 255);
   border: 1px solid grey;
   border-radius: 15px;
+  overflow: hidden;
 `;
 
 const Header = styled.div`
