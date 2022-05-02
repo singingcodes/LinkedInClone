@@ -1,11 +1,24 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import styled from "styled-components";
+import { BiPencil } from "react-icons/bi";
+import { IoClose } from "react-icons/io5";
 
 const MyProfile = () => {
   return (
     <Wrapper>
-      <Header></Header>
+      <Header>
+        <Container>
+          <Row>
+            <Col></Col>
+            <Col>
+              <div className=" d-flex justify-content-end mt-3">
+                <BiPencil size="1.3rem" color="white" />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </Header>
       <AvatarLogo>
         <img
           className="jumbotron-img"
@@ -22,7 +35,6 @@ const MyProfile = () => {
                   Tunde Ednut
                   <span className="text-muted ml-1">(Him/He)</span>
                 </h3>
-
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 <p>
                   <span className="text-muted"> Greater Manchester Area</span>
@@ -43,6 +55,9 @@ const MyProfile = () => {
               </div>
             </Col>
             <Col md={4}>
+              <div className=" d-flex justify-content-end mb-3 text-muted">
+                <BiPencil size="1.5rem" />
+              </div>
               <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h6>
               <p>Facilis odit mollitia aliquam harum corporis quibusdam</p>
             </Col>
@@ -64,6 +79,9 @@ const MyProfile = () => {
             <Col md={6} className="mb-3">
               <div className="jumbotron-footer-left">
                 <p>
+                  <span className=" d-flex justify-content-end">
+                    <BiPencil />
+                  </span>
                   <strong> Lorem ipsum dolor</strong> sit amet consectetur
                   adipisicing elit.
                 </p>
@@ -78,6 +96,9 @@ const MyProfile = () => {
             <Col md={6}>
               <div className="jumbotron-footer-right">
                 <p>
+                  <span className=" d-flex justify-content-end">
+                    <IoClose />
+                  </span>
                   <strong> Lorem ipsum dolor</strong> sit amet consectetur
                   adipisicing elit.
                 </p>
