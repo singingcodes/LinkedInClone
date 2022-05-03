@@ -11,17 +11,26 @@
   padding: 0;
 }
 /* NAvBar styles */
-#responsive-navbar-nav .bi{
-  font-size: 22px;
+#basic-navbar-nav .bi{
+  font-size: 18px;
   text-align: center;
+}
+
+#root > div > nav {
+  background-color: #f3f2ef;
+  /* height: 30px; */
+  width: 100%;
+  padding: 0 0 0 0 !important;
 }
 .search-class{
   font-size: 14px !important;
 }
-#responsive-navbar-nav p{
-  font-size: 10px;
+#basic-navbar-nav p{
+  font-size: 12px;
+  border-bottom: 0 !important;
  
 }
+
 .dropdown-toggle::after {
   display: none;
 }

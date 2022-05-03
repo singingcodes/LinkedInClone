@@ -5,13 +5,14 @@ import {
   Container,
   FormControl,
   InputGroup,
+  Form,
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
 const MyNavBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
       <Container>
-        <Link className="navbar-brand" to="/home">
+        <Link className="navbar-brand" to="/">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuRALyVA0K3z9C2yeZhRpUG7LGbVzLJD8ZmcZReeui69NRx2xonJ3JR5MhTfdFdE-NFSE&usqp=CAU"
             alt="logo"
@@ -19,31 +20,28 @@ const MyNavBar = () => {
           />
         </Link>
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <div className="mt-3">
-              <InputGroup className="mb-3">
+            <Form inline>
+              <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text
                     id="basic-addon1"
                     style={{ backgroundColor: "#EEF3F8" }}
                   >
+                    {" "}
                     <i class="bi bi-search search-class"></i>
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   placeholder="search"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
                   style={{ backgroundColor: "#EEF3F8" }}
                 />
               </InputGroup>
-            </div>
-            {/* <FormControl
-              type="text"
-              placeholder="🔍 search"
-              className="input-class"
-              style={{ backgroundColor: "#EEF3F8" }}
-            /> */}
+            </Form>
           </Nav>
           <Nav>
             <Nav.Link href="#">
