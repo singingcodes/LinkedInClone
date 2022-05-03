@@ -12,6 +12,15 @@ const MyProfile = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    bio: "",
+    title: "",
+    area: "",
+  });
+
   useEffect(() => {
     profileData();
   }, []);
@@ -27,10 +36,32 @@ const MyProfile = () => {
       }
     );
     let profileData = await response.json();
-    console.log(profileData);
+    // console.log(profileData);
     setProfile(profileData);
+    setFormData(profileData);
   };
 
+  const editData = async (e) => {
+    e.preventDefault();
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/",
+      {
+        method: "PUT",
+        body: JSON.stringify(profile),
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+        },
+      }
+    );
+    let formResponse = await response.json();
+  };
+
+  // const handleSubmit = (e) => {
+  //   editData();
+  // };
+  console.log("formData", formData);
   return (
     <>
       <Wrapper>
@@ -148,35 +179,71 @@ const MyProfile = () => {
           <Modal.Title>Edit intro</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={editData}>
             <Form.Group>
               <Form.Label>Name:</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={profile.name}
+                onChange={(e) =>
+                  setProfile({ ...profile, name: e.target.value })
+                }
+              />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Surname:</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={profile.surname}
+                onChange={(e) =>
+                  setProfile({ ...profile, surname: e.target.value })
+                }
+              />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" />
+              <Form.Control
+                type="email"
+                value={profile.email}
+                onChange={(e) =>
+                  setProfile({ ...profile, email: e.target.value })
+                }
+              />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Bio:</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={profile.bio}
+                onChange={(e) =>
+                  setProfile({ ...profile, bio: e.target.value })
+                }
+              />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Title:</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={profile.title}
+                onChange={(e) =>
+                  setProfile({ ...profile, title: e.target.value })
+                }
+              />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Area:</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={profile.area}
+                onChange={(e) =>
+                  setProfile({ ...profile, area: e.target.value })
+                }
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
