@@ -12,6 +12,16 @@
 }
 /* NAvBar styles */
 #basic-navbar-nav .bi{
+
+#responsive-navbar-nav {
+
+ 
+  height: 30px;
+  
+ 
+}
+#responsive-navbar-nav .bi{
+
   font-size: 18px;
   text-align: center;
 }
@@ -23,7 +33,7 @@
   padding: 0 0 0 0 !important;
 }
 .search-class{
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 #basic-navbar-nav p{
   font-size: 12px;
