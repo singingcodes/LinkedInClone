@@ -5,18 +5,20 @@ import ProfileHome from "./components/ProfileHome"
 import MyNavBar from "./components/MyNavBar"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MyFooter from "./components/MyFooter"
+import NotFound from "./components/NotFound"
 
 const App = () => {
   return (
-    <div className="linkedIn-body">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="linkedIn-body">
+        <MyNavBar />
         <Routes>
-          <Route path="/" element={<MyNavBar />} />
+          <Route path="/" element={<ProfileHome />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-      <ProfileHome />
-      <MyFooter />
-    </div>
+        <MyFooter />
+      </div>
+    </BrowserRouter>
   )
 }
 
