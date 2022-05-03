@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 import React from "react";
 import styled from "styled-components";
 import { BiPencil } from "react-icons/bi";
@@ -7,6 +7,10 @@ import { useState, useEffect } from "react";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     profileData();
@@ -28,109 +32,161 @@ const MyProfile = () => {
   };
 
   return (
-    <Wrapper>
-      <Header>
-        <Container>
-          <Row>
-            <Col></Col>
-            <Col>
-              <div className=" d-flex justify-content-end mt-3">
-                <BiPencil size="1.3rem" color="white" />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Header>
-      <AvatarLogo>
-        <img className="jumbotron-img" src={profile.image} alt="avatar" />
-      </AvatarLogo>
-      <Body>
-        <Container>
-          <Row>
-            <Col md={8}>
-              <div className="jumbotron-body">
-                <h3>
-                  {profile.name}
-                  <span className="text-muted ml-1">(Him/He)</span>
-                </h3>
-                <p>{profile.bio}</p>
-                <p>
-                  <span className="text-muted"> {profile.area}</span>
+    <>
+      <Wrapper>
+        <Header>
+          <Container>
+            <Row>
+              <Col></Col>
+              <Col>
+                <div className=" d-flex justify-content-end mt-3">
+                  <BiPencil size="1.3rem" color="white" />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Header>
+        <AvatarLogo>
+          <img className="jumbotron-img" src={profile.image} alt="avatar" />
+        </AvatarLogo>
+        <Body>
+          <Container>
+            <Row>
+              <Col md={8}>
+                <div className="jumbotron-body">
+                  <h3>
+                    {profile.name}
+                    <span className="text-muted ml-1">(Him/He)</span>
+                  </h3>
+                  <p>{profile.bio}</p>
+                  <p>
+                    <span className="text-muted"> {profile.area}</span>
+                    <b>
+                      <a href="asd#" target="_blank" className="ml-2">
+                        {profile.username}
+                      </a>
+                    </b>
+                  </p>
+
+                  <p className="my-2">
+                    <b>
+                      <a href="asd#" target="_blank">
+                        100 Connections
+                      </a>
+                    </b>
+                  </p>
+                </div>
+              </Col>
+              <Col md={4}>
+                <div className=" d-flex justify-content-end mb-3 text-muted">
+                  <BiPencil size="1.5rem" onClick={handleShow} />
+                </div>
+                <h6>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                </h6>
+                <p>Facilis odit mollitia aliquam harum corporis quibusdam</p>
+              </Col>
+            </Row>
+            <ButtonsClick>
+              <button className="jumbotron-btn mr-2  rounded-pill bg-primary text-white text-center px-4 py-2">
+                Open to
+              </button>
+              <button className="jumbotron-btn  mr-2 rounded-pill bg-light border-primary text-primary text-center px-4">
+                Add profile section
+              </button>
+              <button className="jumbotron-btn mr-2 rounded-pill text-center px-4">
+                More
+              </button>
+            </ButtonsClick>
+          </Container>
+          <Container className="mt-3">
+            <Row>
+              <Col md={6} className="mb-3">
+                <div className="jumbotron-footer-left">
+                  <p>
+                    <span className=" d-flex justify-content-end">
+                      <BiPencil />
+                    </span>
+                    <strong> Lorem ipsum dolor</strong> sit amet consectetur
+                    adipisicing elit.
+                  </p>
                   <b>
-                    <a href="asd#" target="_blank" className="ml-2">
-                      {profile.username}
+                    <a href="asd#" target="_blank" className="">
+                      See all details
                     </a>
                   </b>
-                </p>
+                </div>
+              </Col>
 
-                <p className="my-2">
-                  <b>
-                    <a href="asd#" target="_blank">
-                      100 Connections
+              <Col md={6}>
+                <div className="jumbotron-footer-right">
+                  <p>
+                    <span className=" d-flex justify-content-end">
+                      <IoClose />
+                    </span>
+                    <strong> Lorem ipsum dolor</strong> sit amet consectetur
+                    adipisicing elit.
+                  </p>
+                  <b className="mt-2">
+                    <a href="asd#" target="_blank" className="">
+                      Get started
                     </a>
                   </b>
-                </p>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className=" d-flex justify-content-end mb-3 text-muted">
-                <BiPencil size="1.5rem" />
-              </div>
-              <h6>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h6>
-              <p>Facilis odit mollitia aliquam harum corporis quibusdam</p>
-            </Col>
-          </Row>
-          <ButtonsClick>
-            <button className="jumbotron-btn mr-2  rounded-pill bg-primary text-white text-center px-4 py-2">
-              Open to
-            </button>
-            <button className="jumbotron-btn  mr-2 rounded-pill bg-light border-primary text-primary text-center px-4">
-              Add profile section
-            </button>
-            <button className="jumbotron-btn mr-2 rounded-pill text-center px-4">
-              More
-            </button>
-          </ButtonsClick>
-        </Container>
-        <Container className="mt-3">
-          <Row>
-            <Col md={6} className="mb-3">
-              <div className="jumbotron-footer-left">
-                <p>
-                  <span className=" d-flex justify-content-end">
-                    <BiPencil />
-                  </span>
-                  <strong> Lorem ipsum dolor</strong> sit amet consectetur
-                  adipisicing elit.
-                </p>
-                <b>
-                  <a href="asd#" target="_blank" className="">
-                    See all details
-                  </a>
-                </b>
-              </div>
-            </Col>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Body>
+      </Wrapper>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit intro</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
 
-            <Col md={6}>
-              <div className="jumbotron-footer-right">
-                <p>
-                  <span className=" d-flex justify-content-end">
-                    <IoClose />
-                  </span>
-                  <strong> Lorem ipsum dolor</strong> sit amet consectetur
-                  adipisicing elit.
-                </p>
-                <b className="mt-2">
-                  <a href="asd#" target="_blank" className="">
-                    Get started
-                  </a>
-                </b>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Body>
-    </Wrapper>
+            <Form.Group>
+              <Form.Label>Surname:</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="email" />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Bio:</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Title:</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Area:</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 
