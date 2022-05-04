@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import MyFooter from "./components/MyFooter"
 import NotFound from "./components/NotFound"
 import Details from "./components/Details"
+import NewsFeed from "./components/NewsFeed"
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ProfileHome />} />
           <Route path="/details/:Id" element={<Details />} />
+          <Route path="/feed" element={<NewsFeed />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <MyFooter />

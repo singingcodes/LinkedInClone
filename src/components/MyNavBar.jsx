@@ -44,12 +44,12 @@ const MyNavBar = () => {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="#">
+            <Link to="/feed" className="nav-link">
               <div className="nav-network">
                 <i className="bi bi-house-door-fill text-muted"></i>
               </div>
               <p>Home</p>
-            </Nav.Link>
+            </Link>
             <Nav.Link href="#">
               <div className="nav-network">
                 <i className="bi bi-people-fill mr-2 text-muted"></i>
