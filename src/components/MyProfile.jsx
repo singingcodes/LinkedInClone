@@ -54,7 +54,6 @@ const MyProfile = () => {
         },
       }
     );
-    let formResponse = await response.json();
     console.log("Edit Button");
   };
 
