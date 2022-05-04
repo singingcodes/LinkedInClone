@@ -15,7 +15,7 @@ const Details = () => {
   useEffect(() => {
     profileData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params.Id]);
 
   const profileData = async () => {
     let response = await fetch(
