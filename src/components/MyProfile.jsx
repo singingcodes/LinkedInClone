@@ -35,6 +35,7 @@ const MyProfile = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
         },
       }
+
     )
     let profileData = await response.json()
     // console.log(profileData);
@@ -42,19 +43,27 @@ const MyProfile = () => {
     setFormData(profileData)
   }
 
+    );
+    let profileData = await response.json();
+    setProfile(profileData);
+    setFormData(profileData);
+  };
+
+
   const editData = async (e) => {
     e.preventDefault()
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/profile/",
       {
         method: "PUT",
-        body: JSON.stringify(profile),
+        body: JSON.stringify(formData),
         headers: {
           "content-type": "application/json",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
         },
       }
+
     )
     let formResponse = await response.json()
     setProfile(formResponse)
@@ -64,6 +73,13 @@ const MyProfile = () => {
   //   editData();
   // };
   console.log("formData", formData)
+
+    );
+    console.log("Edit Button");
+  };
+
+  console.log("formData", formData);
+
   return (
     <>
       <Wrapper>
@@ -187,9 +203,9 @@ const MyProfile = () => {
               <Form.Label>Name:</Form.Label>
               <Form.Control
                 type="text"
-                value={profile.name}
+                value={formData.name}
                 onChange={(e) =>
-                  setProfile({ ...profile, name: e.target.value })
+                  setProfile({ ...formData, name: e.target.value })
                 }
               />
             </Form.Group>
@@ -198,9 +214,9 @@ const MyProfile = () => {
               <Form.Label>Surname:</Form.Label>
               <Form.Control
                 type="text"
-                value={profile.surname}
+                value={formData.surname}
                 onChange={(e) =>
-                  setProfile({ ...profile, surname: e.target.value })
+                  setProfile({ ...formData, surname: e.target.value })
                 }
               />
             </Form.Group>
@@ -209,9 +225,9 @@ const MyProfile = () => {
               <Form.Label>Email:</Form.Label>
               <Form.Control
                 type="email"
-                value={profile.email}
+                value={formData.email}
                 onChange={(e) =>
-                  setProfile({ ...profile, email: e.target.value })
+                  setProfile({ ...formData, email: e.target.value })
                 }
               />
             </Form.Group>
@@ -220,9 +236,9 @@ const MyProfile = () => {
               <Form.Label>Bio:</Form.Label>
               <Form.Control
                 type="text"
-                value={profile.bio}
+                value={formData.bio}
                 onChange={(e) =>
-                  setProfile({ ...profile, bio: e.target.value })
+                  setProfile({ ...formData, bio: e.target.value })
                 }
               />
             </Form.Group>
@@ -231,9 +247,9 @@ const MyProfile = () => {
               <Form.Label>Title:</Form.Label>
               <Form.Control
                 type="text"
-                value={profile.title}
+                value={formData.title}
                 onChange={(e) =>
-                  setProfile({ ...profile, title: e.target.value })
+                  setProfile({ ...formData, title: e.target.value })
                 }
               />
             </Form.Group>
@@ -242,9 +258,9 @@ const MyProfile = () => {
               <Form.Label>Area:</Form.Label>
               <Form.Control
                 type="text"
-                value={profile.area}
+                value={formData.area}
                 onChange={(e) =>
-                  setProfile({ ...profile, area: e.target.value })
+                  setProfile({ ...formData, area: e.target.value })
                 }
               />
             </Form.Group>
