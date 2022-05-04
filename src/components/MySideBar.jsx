@@ -1,13 +1,13 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap"
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const MySideBar = () => {
-  const [profiles, setProfiles] = useState([])
+  const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     let response = await fetch(
@@ -18,11 +18,11 @@ const MySideBar = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    )
-    let responseData = await response.json()
-    console.log(responseData)
-    setProfiles(responseData)
-  }
+    );
+    let responseData = await response.json();
+    console.log(responseData);
+    setProfiles(responseData);
+  };
 
   return (
     <>
@@ -63,24 +63,26 @@ const MySideBar = () => {
               </Col>
               <Col sm={9}>
                 <div>
-                  <h6
-                    className="font-weight-bold mb-0"
-                    style={{ fontSize: "14px", lineHeight: "1.4" }}
-                  >
-                    {" "}
-                    {profile.name}
-                    <span className="text-muted font-weight-normal">
+                  <Link to={"/details/" + profile._id}>
+                    <h6
+                      className="font-weight-bold mb-0"
+                      style={{ fontSize: "14px", lineHeight: "1.4" }}
+                    >
                       {" "}
-                      <i class="bi bi-dot"></i> 2nd
-                    </span>
-                  </h6>
-                  <h6
-                    className="text-muted"
-                    style={{ fontSize: "13px", lineHeight: "1.4" }}
-                  >
-                    {" "}
-                    {profile.title}
-                  </h6>
+                      {profile.name}
+                      <span className="text-muted font-weight-normal">
+                        {" "}
+                        <i class="bi bi-dot"></i> 2nd
+                      </span>
+                    </h6>
+                    <h6
+                      className="text-muted"
+                      style={{ fontSize: "13px", lineHeight: "1.4" }}
+                    >
+                      {" "}
+                      {profile.title}
+                    </h6>
+                  </Link>
                   <Button
                     style={{
                       borderRadius: "50px",
@@ -182,7 +184,7 @@ const MySideBar = () => {
         </Card.Body>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default MySideBar
+export default MySideBar;
