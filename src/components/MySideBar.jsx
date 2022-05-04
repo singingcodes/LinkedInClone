@@ -1,12 +1,13 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Card, Row, Col, Image, Button } from "react-bootstrap"
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const MySideBar = () => {
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const fetchData = async () => {
     let response = await fetch(
@@ -17,11 +18,11 @@ const MySideBar = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    );
-    let responseData = await response.json();
-    console.log(responseData);
-    setProfiles(responseData);
-  };
+    )
+    let responseData = await response.json()
+    console.log(responseData)
+    setProfiles(responseData)
+  }
 
   return (
     <>
@@ -51,12 +52,14 @@ const MySideBar = () => {
           {profiles.splice(0, 5).map((profile) => (
             <Row key={profile._id}>
               <Col sm={3}>
-                <Image
-                  src={profile.image}
-                  rounded
-                  alt="profile-picture"
-                  height="48px"
-                />
+                <Link to={"/details/" + profile._id}>
+                  <Image
+                    src={profile.image}
+                    rounded
+                    alt="profile-picture"
+                    height="48px"
+                  />
+                </Link>
               </Col>
               <Col sm={9}>
                 <div>
@@ -179,7 +182,7 @@ const MySideBar = () => {
         </Card.Body>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default MySideBar;
+export default MySideBar
