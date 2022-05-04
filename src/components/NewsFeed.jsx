@@ -7,13 +7,13 @@ const NewsFeed = () => {
     <>
       <Container className="my-3">
         <Row>
-          <Col md={2}>
+          <Col md={3}>
             <NewsFeedProfile />
           </Col>
           <Col md={6}>
             <NewsFeedPost />
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <NewsFeedExtra />
           </Col>
         </Row>
