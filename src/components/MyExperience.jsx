@@ -1,23 +1,15 @@
-import { Card, Row, Image, Col, Modal, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Modal, Form, Button } from "react-bootstrap";
+
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { parseISO, format } from "date-fns";
-import { BiPencil, BiPlus } from "react-icons/bi";
+
+import { BiPlus } from "react-icons/bi";
+import SingleExperience from "./SingleExperience";
 
 const MyExperience = () => {
-  const [profiles, setProfiles] = useState([]);
+  const [experinces, setExperiences] = useState([]);
 
   const [addExperience, setAddExperience] = useState({
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    area: "",
-  });
-
-  const [editExperiences, setEditExperiences] = useState({
     role: "",
     company: "",
     startDate: "",
@@ -35,10 +27,6 @@ const MyExperience = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [editShow, setEditShow] = useState(false);
-  const handleEditClose = () => setEditShow(false);
-  const handleEditShow = () => setEditShow(true);
-
   // this is the function that fetches user experience
   const fetchExperience = async () => {
     let response = await fetch(
@@ -52,8 +40,7 @@ const MyExperience = () => {
     );
     let responseData = await response.json();
     console.log(responseData);
-    setProfiles(responseData);
-    setEditExperiences(responseData);
+    setExperiences(responseData);
   };
   // this is the function that handles the adding user experience
   const submitExperience = async (e) => {
@@ -90,30 +77,6 @@ const MyExperience = () => {
     }
   };
 
-  const editExperience = async (e, _id) => {
-    console.log("here is ID", _id);
-    e.preventDefault();
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/62722ad6bf16950015c8004c",
-        {
-          method: "PUT",
-          body: JSON.stringify(editExperiences),
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response);
-      let editExp = await response.json();
-      setEditExperiences(editExp);
-    } catch (error) {
-      alert("error", error);
-    }
-  };
-
   return (
     <>
       <Wrapper className="my-2">
@@ -130,64 +93,8 @@ const MyExperience = () => {
                 <BiPlus size="1.5rem" onClick={handleShow} />
               </div>
             </div>
-            {profiles.map((profile) => (
-              <div key={profile._id}>
-                <Row>
-                  <Col md={1}>
-                    <div>
-                      <Link to={""}>
-                        <Image
-                          src="/assests/profile-picture.png"
-                          rounded
-                          alt="profile-picture"
-                          height="58px"
-                        />
-                      </Link>
-                    </div>
-                  </Col>
-                  <Col md={10}>
-                    <h6
-                      className="font-weight-bold my-1"
-                      style={{ fontSize: "14px", lineHeight: "1.4" }}
-                    >
-                      {profile.role}
-                    </h6>
-
-                    <p
-                      className="text-muted my-1"
-                      style={{ fontSize: "13px", lineHeight: "1.4" }}
-                    >
-                      {profile.company}
-                    </p>
-                    <p
-                      className="m-0 text-muted"
-                      style={{ fontSize: "13px", lineHeight: "1.4" }}
-                    >
-                      {format(parseISO(profile.startDate), "MMMM yyyy")} -{" "}
-                      {format(parseISO(profile.endDate), "MMMM yyyy")}
-                    </p>
-                    <span
-                      className="text-muted"
-                      style={{ fontSize: "13px", lineHeight: "1.4" }}
-                    >
-                      {profile.area}
-                    </span>
-                  </Col>
-
-                  <Col md={1}>
-                    <div className="">
-                      <BiPencil
-                        size="1.1rem"
-                        color="black"
-                        onClick={handleEditShow}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-                <div>
-                  <hr />
-                </div>
-              </div>
+            {experinces.map((experience) => (
+              <SingleExperience experience={experience} />
             ))}
           </Card.Body>
         </div>
@@ -280,107 +187,6 @@ const MyExperience = () => {
               />
             </Form.Group>
             <Button variant="primary" type="submit" onClick={handleClose}>
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-      {/* Edit Modal  */}
-
-      <Modal
-        show={editShow}
-        onHide={handleEditClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Experience</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={editExperience}>
-            <Form.Group>
-              <Form.Label>Role* </Form.Label>
-              <Form.Control
-                type="text"
-                value={editExperiences.role}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    role: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Company*</Form.Label>
-              <Form.Control
-                type="text"
-                value={editExperiences.company}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    company: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Start Date*</Form.Label>
-              <Form.Control
-                type="date"
-                value={editExperiences.startDate}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    startDate: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>End Date*</Form.Label>
-              <Form.Control
-                type="date"
-                value={editExperiences.endDate}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    endDate: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Area*</Form.Label>
-              <Form.Control
-                type="text"
-                value={editExperiences.area}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    area: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Description*</Form.Label>
-              <Form.Control
-                type="text"
-                value={editExperiences.description}
-                onChange={(e) =>
-                  setEditExperiences({
-                    ...editExperiences,
-                    description: e.target.value,
-                  })
-                }
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" onClick={handleEditClose}>
               Submit
             </Button>
           </Form>

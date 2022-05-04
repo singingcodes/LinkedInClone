@@ -6,6 +6,7 @@ import { BiPencil } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MySideBar from "./MySideBar";
+import MyExperience from "./MyExperience";
 
 const Details = () => {
   const [profile, setProfile] = useState("");
@@ -108,6 +109,7 @@ const Details = () => {
                 </Container>
               </Body>
             </Wrapper>
+            <MyExperience />
           </Col>
           <Col md={4}>
             <MySideBar />
