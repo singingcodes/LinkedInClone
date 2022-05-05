@@ -35,17 +35,14 @@ const PostSection = ({ post }) => {
               </h6>
               <p>{post.user.title}</p>
               <p className="d-inline mr-1 text-muted ">
-                <ReactTimeAgo date={post.user.createdAt} locale="en-US" />
+                <ReactTimeAgo date={post.updatedAt} locale="en-US" />
               </p>
               <IoMdGlobe size="1rem" className="text-muted " />
             </div>
             <RiMoreFill size="1.2rem" className="float-right mb-5 text-mute" />
           </Header>
           <Body>
-            <p className="skeleton-text mb-2 skeleton">
-              {post.user.bio}
-              {post.text}
-            </p>
+            <p className="skeleton-text mb-2 skeleton">{post.text}</p>
 
             <img src={post.user.image} alt="cat pic" className="mb-4 w-100" />
             <div>
