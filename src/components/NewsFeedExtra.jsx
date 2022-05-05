@@ -1,13 +1,13 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Card, Row, Col, Image, Button } from "react-bootstrap"
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const NewsFeedExtra = () => {
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const fetchData = async () => {
     let response = await fetch(
@@ -18,11 +18,11 @@ const NewsFeedExtra = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    );
-    let responseData = await response.json();
-    console.log(responseData);
-    setProfiles(responseData);
-  };
+    )
+    let responseData = await response.json()
+    console.log(responseData)
+    setProfiles(responseData)
+  }
 
   return (
     <>
@@ -55,7 +55,7 @@ const NewsFeedExtra = () => {
                       {profile.name}
                       <span className="text-muted font-weight-normal">
                         {" "}
-                        <i class="bi bi-dot"></i> 2nd
+                        <i className="bi bi-dot"></i> 2nd
                       </span>
                     </h6>
                     <h6
@@ -92,7 +92,7 @@ const NewsFeedExtra = () => {
                 }}
               >
                 {" "}
-                View all recommendations <i class="bi bi-arrow-right"></i>
+                View all recommendations <i className="bi bi-arrow-right"></i>
               </h6>
             </Col>
           </Row>
@@ -104,7 +104,7 @@ const NewsFeedExtra = () => {
       <Card style={{ width: "18rem" }} className="mb-3">
         <Card.Body>
           <Card.Title className="font-weight-bold" style={{ fontSize: "16px" }}>
-            Promoted <i class="bi bi-three-dots float-right"></i>
+            Promoted <i className="bi bi-three-dots float-right"></i>
           </Card.Title>
 
           <Row>
@@ -136,7 +136,7 @@ const NewsFeedExtra = () => {
             </Col>
             <Col sm={1} className="p-1 mx-n1">
               <i
-                class="bi bi-chevron-compact-right p-0"
+                className="bi bi-chevron-compact-right p-0"
                 style={{ fontSize: "2rem" }}
               ></i>
             </Col>
@@ -171,7 +171,7 @@ const NewsFeedExtra = () => {
             </Col>
             <Col sm={1} className="p-1 mx-n1">
               <i
-                class="bi bi-chevron-compact-right p-0"
+                className="bi bi-chevron-compact-right p-0"
                 style={{ fontSize: "2rem" }}
               ></i>
             </Col>
@@ -206,7 +206,7 @@ const NewsFeedExtra = () => {
             </Col>
             <Col sm={1} className="p-1 mx-n1">
               <i
-                class="bi bi-chevron-compact-right p-0 "
+                className="bi bi-chevron-compact-right p-0 "
                 style={{ fontSize: "2rem" }}
               ></i>
             </Col>
@@ -214,7 +214,7 @@ const NewsFeedExtra = () => {
         </Card.Body>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default NewsFeedExtra;
+export default NewsFeedExtra

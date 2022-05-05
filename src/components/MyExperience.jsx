@@ -1,13 +1,13 @@
-import { Card, Modal, Form, Button } from "react-bootstrap";
+import { Card, Modal, Form, Button } from "react-bootstrap"
 
-import styled from "styled-components";
-import { useState, useEffect } from "react";
+import styled from "styled-components"
+import { useState, useEffect } from "react"
 
-import { BiPlus } from "react-icons/bi";
-import SingleExperience from "./SingleExperience";
+import { BiPlus } from "react-icons/bi"
+import SingleExperience from "./SingleExperience"
 
 const MyExperience = () => {
-  const [experinces, setExperiences] = useState([]);
+  const [experiences, setExperiences] = useState([])
 
   const [addExperience, setAddExperience] = useState({
     role: "",
@@ -16,16 +16,16 @@ const MyExperience = () => {
     endDate: "",
     description: "",
     area: "",
-  });
+  })
 
   useEffect(() => {
-    fetchExperience();
+    fetchExperience()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  }, [])
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   // this is the function that fetches user experience
   const fetchExperience = async () => {
@@ -37,14 +37,14 @@ const MyExperience = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    );
-    let responseData = await response.json();
-    console.log(responseData);
-    setExperiences(responseData);
-  };
+    )
+    let responseData = await response.json()
+    console.log(responseData)
+    setExperiences(responseData)
+  }
   // this is the function that handles the adding user experience
   const submitExperience = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences",
@@ -57,25 +57,25 @@ const MyExperience = () => {
             "Content-Type": "application/json",
           },
         }
-      );
-      console.log(response);
+      )
+      console.log(response)
       if (response.ok) {
-        console.log(response);
-        alert("ok");
+        console.log(response)
+        alert("ok")
         setAddExperience({
           role: "",
           company: "",
           startDate: "",
           endDate: "",
           area: "",
-        });
+        })
       } else {
-        alert("error");
+        alert("error")
       }
     } catch (error) {
-      alert("error", error);
+      alert("error", error)
     }
-  };
+  }
 
   return (
     <>
@@ -93,8 +93,10 @@ const MyExperience = () => {
                 <BiPlus size="1.5rem" onClick={handleShow} />
               </div>
             </div>
-            {experinces.map((experience) => (
-              <SingleExperience experience={experience} />
+            {experiences.map((experience) => (
+              <div key={experience._id}>
+                <SingleExperience experience={experience} />
+              </div>
             ))}
           </Card.Body>
         </div>
@@ -193,14 +195,14 @@ const MyExperience = () => {
         </Modal.Body>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default MyExperience;
+export default MyExperience
 const Wrapper = styled.div`
   position: relative;
   background-color: rgb(255, 255, 255);
   border: 0.1px solid #e0dfdc;
   border-radius: 15px;
   overflow: hidden;
-`;
+`

@@ -1,7 +1,6 @@
 import {
   Navbar,
   Nav,
-  Dropdown,
   Container,
   FormControl,
   InputGroup,
@@ -31,7 +30,7 @@ const MyNavBar = () => {
                     style={{ backgroundColor: "#EEF3F8" }}
                   >
                     {" "}
-                    <i class="bi bi-search search-class"></i>
+                    <i className="bi bi-search search-class"></i>
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
@@ -48,24 +47,26 @@ const MyNavBar = () => {
               <div className="nav-network">
                 <i className="bi bi-house-door-fill text-muted"></i>
               </div>
-              <p>Home</p>
+              <p className="m-0">Home</p>
             </Link>
             <Nav.Link href="#">
               <div className="nav-network">
-                <i className="bi bi-people-fill mr-2 text-muted"></i>
+                <i className=" nav-network bi bi-people-fill mr-2 text-muted"></i>
               </div>
-              <p>My Network</p>
+              <p className="m-0">My Network</p>
             </Nav.Link>
             <Nav.Link href="#">
-              <i className="bi bi-bag-fill text-muted"></i>
-              <p>Jobs</p>
+              <div className="nav-network">
+                <i className="bi bi-bag-fill text-muted"></i>
+              </div>
+              <p className="m-0">Jobs</p>
             </Nav.Link>
             <Nav.Link href="#">
               <div className="nav-network">
                 <i className="bi bi-chat-dots-fill text-muted"></i>
               </div>
 
-              <p>Messaging</p>
+              <p className="m-0">Messaging</p>
             </Nav.Link>
             <Nav.Link href="#">
               <div className="nav-network">
@@ -73,35 +74,25 @@ const MyNavBar = () => {
                 <span className="badge badge-danger">3</span>
               </div>
 
-              <p>Notifications</p>
+              <p className="m-0">Notifications</p>
             </Nav.Link>
-            <Dropdown>
-              <Dropdown.Toggle
-                style={{
-                  backgroundColor: "white",
-                  borderColor: "1px solid white !important",
-                  outline: "1px solid white !important",
-                }}
-                id="dropdown-basic"
-                className="p-1"
-              >
-                {" "}
-                <i className="bi bi-person-circle text-muted"></i>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
             <Nav.Link href="#">
-              <hr width="1" size="100" style={{ color: "#000" }} />
+              <div className="nav-network">
+                <i className="bi bi-person-circle text-muted"></i>
+              </div>
+
+              <p className="m-0">Me</p>
             </Nav.Link>
 
-            <Nav.Link href="#memes">
-              <i className="bi bi-plus-square-dotted text-muted"></i>
-              <p>Work</p>
+            {/* <Nav.Link href="#">
+              <hr width="1" size="100" style={{ color: "#000" }} />
+            </Nav.Link> */}
+
+            <Nav.Link id="meme" href="#memes">
+              <div className="nav-network">
+                <i className="bi bi-grid-3x3-gap-fill text-muted"></i>
+              </div>
+              <p className="m-0">Work</p>
             </Nav.Link>
             <Nav.Link href="#memes">
               Reactivate <br /> Premium{" "}

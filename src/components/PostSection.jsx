@@ -1,53 +1,56 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import styled from "styled-components";
-import { AiFillLike, AiOutlineComment } from "react-icons/ai";
-import { BiLike } from "react-icons/bi";
-import {
-  RiShareForwardLine,
-  RiSendPlaneFill,
-  RiMoreFill,
-} from "react-icons/ri";
-import { FcLike } from "react-icons/fc";
-import { IoMdGlobe } from "react-icons/io";
+import styled from "styled-components"
+import { AiFillLike, AiOutlineComment } from "react-icons/ai"
+import { BiLike } from "react-icons/bi"
+import { RiShareForwardLine, RiSendPlaneFill, RiMoreFill } from "react-icons/ri"
+import { FcLike } from "react-icons/fc"
+import { IoMdGlobe } from "react-icons/io"
+import TimeAgo from "javascript-time-ago"
+import ReactTimeAgo from "react-time-ago"
 
-const PostSection = () => {
+import en from "javascript-time-ago/locale/en.json"
+import ru from "javascript-time-ago/locale/ru.json"
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
+
+const PostSection = ({ post }) => {
   return (
     <div>
       <>
         <Wrapper>
           <Header>
             <img
-              src="https://placekitten.com/100/100"
+              src={post.user.image}
               className="skeleton-profile-pic skeleton"
             />
             <div>
               <h6 className="skeleton-name skeleton font-weight-bold">
-                James Arnold
+                {post.user.name} {post.user.surname}
               </h6>
-              <p>500 followers</p>
-              <p className="d-inline mr-1 text-muted ">5d. Edited .</p>
+              <p>{post.user.title}</p>
+              <p className="d-inline mr-1 text-muted ">
+                <ReactTimeAgo date={post.user.createdAt} locale="en-US" />
+              </p>
               <IoMdGlobe size="1rem" className="text-muted " />
             </div>
-            <RiMoreFill size="1.2rem" className="float-right mb-5" />
+            <RiMoreFill size="1.2rem" className="float-right mb-5 text-mute" />
           </Header>
           <Body>
             <p className="skeleton-text mb-2 skeleton">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
-              qui veritatis. Doloribus fugiat blanditiis nihil praesentium
-              dolores earum accusamus quia dolorum repellat sint.
+              {post.user.bio}
+              {post.text}
             </p>
 
-            <img
-              src="https://images.unsplash.com/photo-1552308995-2baac1ad5490?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGphdmFzY3JpcHR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-              alt="cat pic"
-              className="mb-4 w-100"
-            />
-
+            <img src={post.user.image} alt="cat pic" className="mb-4 w-100" />
             <div>
-              <AiFillLike />
-              <span>9</span>
-              <span>129 comments</span>
+              <span>
+                <AiFillLike />
+                <FcLike />
+              </span>
+              <span>45</span>
+              <span>300 comments</span>
             </div>
           </Body>
 
@@ -70,178 +73,12 @@ const PostSection = () => {
             </Section>
           </Footer>
         </Wrapper>
-        <Wrapper>
-          <Header>
-            <img
-              src="https://placekitten.com/130/130"
-              className="skeleton-profile-pic skeleton"
-            />
-            <div>
-              <h6 className="skeleton-name skeleton font-weight-bold">
-                Emilian Kasemi
-              </h6>
-              <p>Full-Stack (MERN) Javascript,Reactjs</p>
-              <p className="d-inline mr-1 text-muted ">1w.</p>
-              <IoMdGlobe size="1rem" className="text-muted " />
-            </div>
-            <RiMoreFill size="1.2rem" className="float-right mb-5" />
-          </Header>
-          <Body>
-            <p className="skeleton-text mb-2 skeleton">Very Beautiful Day</p>
-
-            <img
-              src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8amF2YXNjcmlwdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-              alt="cat pic"
-              className="mb-4 w-100"
-            />
-            <div>
-              <AiFillLike />
-              <span>100</span>
-              <span>21 comments</span>
-            </div>
-          </Body>
-
-          <Footer>
-            <Section>
-              <BiLike size="1.3rem" />
-              <div className="ml-1">Like</div>
-            </Section>
-            <Section>
-              <AiOutlineComment size="1.3rem" />
-              <div className="ml-1">Comment</div>
-            </Section>
-            <Section>
-              <RiShareForwardLine size="1.3rem" />
-              <div className="ml-1">Share</div>
-            </Section>
-            <Section>
-              <RiSendPlaneFill size="1.3rem" />
-              <div className="ml-1">Send</div>
-            </Section>
-          </Footer>
-        </Wrapper>
-      </>
-      <>
-        <Wrapper>
-          <Header>
-            <img src="https://placekitten.com/120/120" alt="img" />
-            <div>
-              <h6 className="skeleton-name skeleton font-weight-bold">
-                Sarah Awolowo
-              </h6>
-              <p>Hamburger Ceo.</p>
-              <p className="d-inline mr-1 text-muted ">1min ago</p>
-              <IoMdGlobe size="1rem" className="text-muted " />
-            </div>
-            <RiMoreFill size="1.2rem" className="float-right mb-5" />
-          </Header>
-          <Body>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-              ut expedita sint culpa non nihil placeat asperiores numquam,
-              eligendi earum velit neque quos. Dolores impedit provident quasi,
-              quia accusamus distinctio.
-            </p>
-            <img
-              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
-              alt=""
-              className="w-100 mb-4"
-            />
-            <div>
-              <AiFillLike />
-              <span>19</span>
-              <span>10 comments</span>
-            </div>
-          </Body>
-
-          <Footer>
-            <Section>
-              <BiLike size="1.3rem" />
-              <div className="ml-1">Like</div>
-            </Section>
-            <Section>
-              <AiOutlineComment size="1.3rem" />
-              <div className="ml-1">Comment</div>
-            </Section>
-            <Section>
-              <RiShareForwardLine size="1.3rem" />
-              <div className="ml-1">Share</div>
-            </Section>
-            <Section>
-              <RiSendPlaneFill size="1.3rem" />
-              <div className="ml-1">Send</div>
-            </Section>
-          </Footer>
-        </Wrapper>
-        <>
-          <Wrapper>
-            <Header>
-              <img
-                src="https://placekitten.com/125/125"
-                className="skeleton-profile-pic skeleton"
-              />
-              <div>
-                <h6 className="skeleton-name skeleton font-weight-bold">
-                  Hassan Al-muntairi
-                </h6>
-                <p>Promoted</p>
-                <p className="d-inline mr-1 text-muted ">2h.</p>
-                <IoMdGlobe size="1rem" className="text-muted " />
-              </div>
-              <RiMoreFill
-                size="1.2rem"
-                className="float-right mb-5 text-mute"
-              />
-            </Header>
-            <Body>
-              <p className="skeleton-text mb-2 skeleton">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-                placeat iusto, facere explicabo commodi, minima modi vitae
-                atque, distinctio alias architecto sequi quam consequatur
-                corrupti porro blanditiis magni voluptas saepe.
-              </p>
-
-              <img
-                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
-                alt="cat pic"
-                className="mb-4 w-100"
-              />
-              <div>
-                <span>
-                  <AiFillLike />
-                  <FcLike />
-                </span>
-                <span>45</span>
-                <span>300 comments</span>
-              </div>
-            </Body>
-
-            <Footer>
-              <Section>
-                <BiLike size="1.3rem" />
-                <div className="ml-1">Like</div>
-              </Section>
-              <Section>
-                <AiOutlineComment size="1.3rem" />
-                <div className="ml-1">Comment</div>
-              </Section>
-              <Section>
-                <RiShareForwardLine size="1.3rem" />
-                <div className="ml-1">Share</div>
-              </Section>
-              <Section>
-                <RiSendPlaneFill size="1.3rem" />
-                <div className="ml-1">Send</div>
-              </Section>
-            </Footer>
-          </Wrapper>
-        </>
       </>
     </div>
-  );
-};
+  )
+}
 
-export default PostSection;
+export default PostSection
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -255,7 +92,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 
 const Header = styled.div`
   height: 3rem;
@@ -282,7 +119,7 @@ const Header = styled.div`
     }
     margin-right: auto;
   }
-`;
+`
 
 const Body = styled.div`
   margin-top: 1rem;
@@ -308,7 +145,7 @@ const Body = styled.div`
       margin-left: auto;
     }
   }
-`;
+`
 
 const Footer = styled.div`
   display: flex;
@@ -319,7 +156,7 @@ const Footer = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e6e6e6;
-`;
+`
 
 const Section = styled.div`
   cursor: pointer;
@@ -338,4 +175,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`;
+`

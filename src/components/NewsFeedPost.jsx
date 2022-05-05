@@ -1,8 +1,28 @@
-import styled from "styled-components";
-import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc";
-import PostSection from "./PostSection";
+import styled from "styled-components"
+import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc"
+import PostSection from "./PostSection"
+import { useState, useEffect } from "react"
 
 const NewsFeedPost = () => {
+  const [posts, setPosts] = useState([])
+  useEffect(() => {
+    getPost()
+  }, [])
+  const getPost = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/posts/",
+      {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+        },
+      }
+    )
+    let postData = await response.json()
+    console.log(postData)
+    setPosts(postData)
+  }
+
   return (
     <>
       <Wrapper>
@@ -37,13 +57,16 @@ const NewsFeedPost = () => {
       </Wrapper>
 
       <hr />
-
-      <PostSection />
+      {posts.splice(1, 6).map((post) => (
+        <div key={post._id}>
+          <PostSection post={post} />
+        </div>
+      ))}
     </>
-  );
-};
+  )
+}
 
-export default NewsFeedPost;
+export default NewsFeedPost
 
 const Wrapper = styled.div`
   padding: 1rem 1rem;
@@ -52,7 +75,7 @@ const Wrapper = styled.div`
   border: 1px solid #e6e6e6;
   background-color: white;
   margin-bottom: 1rem;
-`;
+`
 
 const Header = styled.div`
   height: 3rem;
@@ -65,7 +88,7 @@ const Header = styled.div`
     border-radius: 50%;
     margin-right: 1rem;
   }
-`;
+`
 
 const Input = styled.input`
   flex-grow: 1;
@@ -73,7 +96,7 @@ const Input = styled.input`
   border-radius: 25px;
   border: 1px solid #adadad;
   padding: 0 1rem;
-`;
+`
 
 const Footer = styled.div`
   display: flex;
@@ -82,7 +105,7 @@ const Footer = styled.div`
   height: 3rem;
   width: 100%;
   margin-top: 1rem;
-`;
+`
 
 const Section = styled.div`
   cursor: pointer;
@@ -101,4 +124,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`;
+`
