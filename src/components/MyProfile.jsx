@@ -8,6 +8,7 @@ import MyExperience from "./MyExperience";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState("");
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

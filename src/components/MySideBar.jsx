@@ -122,36 +122,40 @@ const MySideBar = () => {
           <Card.Title className="font-weight-bold" style={{ fontSize: "16px" }}>
             People you may know
           </Card.Title>
-          {profiles.splice(50, 5).map((profile) => (
+          {profiles.splice(0, 5).map((profile) => (
             <Row key={profile._id}>
               <Col sm={3}>
-                <Image
-                  src={profile.image}
-                  rounded
-                  alt="profile-picture"
-                  height="48px"
-                />
+                <Link to={"/details/" + profile._id}>
+                  <Image
+                    src={profile.image}
+                    rounded
+                    alt="profile-picture"
+                    height="48px"
+                  />
+                </Link>
               </Col>
               <Col sm={9}>
                 <div>
-                  <h6
-                    className="font-weight-bold mb-0"
-                    style={{ fontSize: "14px", lineHeight: "1.4" }}
-                  >
-                    {" "}
-                    {profile.name}
-                    <span className="text-muted font-weight-normal">
+                  <Link to={"/details/" + profile._id}>
+                    <h6
+                      className="font-weight-bold mb-0"
+                      style={{ fontSize: "14px", lineHeight: "1.4" }}
+                    >
                       {" "}
-                      <i class="bi bi-dot"></i> 2nd
-                    </span>
-                  </h6>
-                  <h6
-                    className="text-muted"
-                    style={{ fontSize: "13px", lineHeight: "1.4" }}
-                  >
-                    {" "}
-                    {profile.title}
-                  </h6>
+                      {profile.name}
+                      <span className="text-muted font-weight-normal">
+                        {" "}
+                        <i class="bi bi-dot"></i> 2nd
+                      </span>
+                    </h6>
+                    <h6
+                      className="text-muted"
+                      style={{ fontSize: "13px", lineHeight: "1.4" }}
+                    >
+                      {" "}
+                      {profile.title}
+                    </h6>
+                  </Link>
                   <Button
                     style={{
                       borderRadius: "50px",
