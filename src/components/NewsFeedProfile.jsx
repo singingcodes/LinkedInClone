@@ -2,20 +2,35 @@ import { Container, Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { BsStarFill } from "react-icons/bs"
 import { FcKindle } from "react-icons/fc"
+import { useState, useEffect } from "react"
 
 import styled from "styled-components"
 
 const NewsFeedProfile = () => {
+  const [profile, setProfile] = useState("")
+  useEffect(() => {
+    profileData()
+  }, [])
+  const profileData = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/me",
+      {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+        },
+      }
+    )
+    let profileData = await response.json()
+    // console.log(profileData);
+    setProfile(profileData)
+  }
   return (
     <>
       <Wrapper>
         <Header></Header>
         <AvatarLogo>
-          <img
-            className="jumbotron-img"
-            src="/assests/profile-picture.png"
-            alt="avatar"
-          />
+          <img className="jumbotron-img" src={profile.image} alt="avatar" />
         </AvatarLogo>
         <Body>
           <Container>
@@ -23,12 +38,12 @@ const NewsFeedProfile = () => {
               <Col>
                 <div className="jumbotron-body">
                   <Link to="/" className="text-dark text-center">
-                    <h5>Sarah Smith</h5>
+                    <h5>
+                      {profile.name} {profile.surname}
+                    </h5>
                   </Link>
 
-                  <p className="my-2 text-muted text-center">
-                    Software Engineer at <b>Google</b>
-                  </p>
+                  <p className="my-2 text-muted text-center">{profile.bio}</p>
                 </div>
                 <hr />
                 <p style={{ fontSize: "12px" }} className="text-muted">
@@ -63,7 +78,7 @@ const NewsFeedProfile = () => {
         <Container>
           <Row>
             <Col>
-              <h5 className="text-muted my-2">Recent</h5>
+              <h5 className="text-primary my-2">Recent</h5>
               <ul
                 className="list-unstyled text-muted"
                 style={{ fontSize: "12px" }}
