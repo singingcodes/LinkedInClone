@@ -42,12 +42,13 @@
 }
 .nav-network p {
   font-size: 10px;
+
 }
 .nav-network span {
   font-size: 8px;
   position: relative;
-  top: -7px;
-  left: -17px;
+  top: -4px;
+  left: -8px;
 }
 .nav-line {
   border-left: 1px solid rgb(63, 63, 63);
@@ -57,7 +58,10 @@
   font-size: 12px;
   line-height: 1.7;
 }
-
+#meme{
+  border-right: 1px solid #EBEBEB;
+height: 100%;
+}
 /* Jumbotron*/
 .jumbotron-img {
   width: 100%;

@@ -1,13 +1,13 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Card, Row, Col, Image, Button } from "react-bootstrap"
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const MySideBar = () => {
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const fetchData = async () => {
     let response = await fetch(
@@ -18,11 +18,11 @@ const MySideBar = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    );
-    let responseData = await response.json();
-    console.log(responseData);
-    setProfiles(responseData);
-  };
+    )
+    let responseData = await response.json()
+    console.log(responseData)
+    setProfiles(responseData)
+  }
 
   return (
     <>
@@ -31,14 +31,14 @@ const MySideBar = () => {
           <Card.Text className="font-weight-bold" style={{ fontSize: "14px" }}>
             Edit public profile & URL{" "}
             <span className="float-right">
-              <i class="bi bi-question-circle-fill"></i>
+              <i className="bi bi-question-circle-fill"></i>
             </span>
           </Card.Text>
           <hr></hr>
           <Card.Text className="font-weight-bold" style={{ fontSize: "14px" }}>
             Add profile in another language{" "}
             <span className="float-right">
-              <i class="bi bi-question-circle-fill"></i>
+              <i className="bi bi-question-circle-fill"></i>
             </span>
           </Card.Text>
         </Card.Body>
@@ -72,7 +72,7 @@ const MySideBar = () => {
                       {profile.name}
                       <span className="text-muted font-weight-normal">
                         {" "}
-                        <i class="bi bi-dot"></i> 2nd
+                        <i className="bi bi-dot"></i> 2nd
                       </span>
                     </h6>
                     <h6
@@ -108,7 +108,7 @@ const MySideBar = () => {
             <Col>
               <h6 className="text-center font-weight-bold m-0 text-muted">
                 {" "}
-                Show more <i class="bi bi-chevron-compact-down"></i>
+                Show more <i className="bi bi-chevron-compact-down"></i>
               </h6>
             </Col>
           </Row>
@@ -145,7 +145,7 @@ const MySideBar = () => {
                       {profile.name}
                       <span className="text-muted font-weight-normal">
                         {" "}
-                        <i class="bi bi-dot"></i> 2nd
+                        <i className="bi bi-dot"></i> 2nd
                       </span>
                     </h6>
                     <h6
@@ -181,14 +181,14 @@ const MySideBar = () => {
             <Col>
               <h6 className="text-center font-weight-bold m-0 text-muted">
                 {" "}
-                Show more <i class="bi bi-chevron-compact-down"></i>
+                Show more <i className="bi bi-chevron-compact-down"></i>
               </h6>
             </Col>
           </Row>
         </Card.Body>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default MySideBar;
+export default MySideBar
