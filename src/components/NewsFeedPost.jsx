@@ -1,23 +1,23 @@
-import styled from "styled-components"
-import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc"
-import PostSection from "./PostSection"
-import { useState, useEffect } from "react"
-import { Modal, Button } from "react-bootstrap"
+import styled from "styled-components";
+import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc";
+import PostSection from "./PostSection";
+import { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 const NewsFeedPost = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [sendPost, setSendPost] = useState({
     text: "",
-  })
+  });
 
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getPost()
-  }, [])
+    getPost();
+  }, []);
 
   const getPost = async () => {
     let response = await fetch(
@@ -28,14 +28,14 @@ const NewsFeedPost = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
         },
       }
-    )
-    let postData = await response.json()
-    console.log(postData)
-    setPosts(postData)
-  }
+    );
+    let postData = await response.json();
+    console.log(postData);
+    setPosts(postData);
+  };
 
   const handlePost = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       let response = await fetch(
@@ -49,22 +49,22 @@ const NewsFeedPost = () => {
             "Content-Type": "application/json",
           },
         }
-      )
+      );
       if (response.ok) {
-        let postData = await response.json()
-        console.log(postData)
-        alert("success")
-        setShow(false)
+        let postData = await response.json();
+        console.log(postData);
+        alert("success");
+        setShow(false);
         setSendPost({
           text: "",
-        })
+        });
       } else {
-        alert("error else")
+        alert("error else");
       }
     } catch (error) {
-      alert("error")
+      alert("error");
     }
-  }
+  };
 
   return (
     <>
@@ -129,9 +129,6 @@ const NewsFeedPost = () => {
               value={sendPost.text}
               onChange={(e) => setSendPost({ sendPost, text: e.target.value })}
             />
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
             <Button variant="primary" onClick={handleClose} type="submit">
               POST
             </Button>
@@ -139,10 +136,10 @@ const NewsFeedPost = () => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default NewsFeedPost
+export default NewsFeedPost;
 
 const Wrapper = styled.div`
   padding: 1rem 1rem;
@@ -151,7 +148,7 @@ const Wrapper = styled.div`
   border: 1px solid #e6e6e6;
   background-color: white;
   margin-bottom: 1rem;
-`
+`;
 
 const Header = styled.div`
   height: 3rem;
@@ -164,7 +161,7 @@ const Header = styled.div`
     border-radius: 50%;
     margin-right: 1rem;
   }
-`
+`;
 
 const Input = styled.input`
   flex-grow: 1;
@@ -172,7 +169,7 @@ const Input = styled.input`
   border-radius: 25px;
   border: 1px solid #adadad;
   padding: 0 1rem;
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -181,7 +178,7 @@ const Footer = styled.div`
   height: 3rem;
   width: 100%;
   margin-top: 1rem;
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -200,4 +197,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`
+`;
