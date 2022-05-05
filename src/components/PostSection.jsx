@@ -15,6 +15,7 @@ import ReactTimeAgo from "react-time-ago";
 import { useState } from "react";
 import { Modal, Container, Row, Col, Button } from "react-bootstrap";
 import en from "javascript-time-ago/locale/en.json";
+import { AiFillDelete } from "react-icons/ai";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -26,6 +27,49 @@ const PostSection = ({ post }) => {
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
+
+  const [editPost, setEditPost] = useState(post);
+
+  const fetchEditPost = async (e) => {
+    e.preventDefault();
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
+      {
+        method: "PUT",
+        body: JSON.stringify(editPost),
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      alert("Post Edited Succesfully");
+    }
+  };
+
+  const deletePost = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
+        {
+          method: "DELETE",
+          body: JSON.stringify(editPost),
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Deleted Succesfully");
+      }
+    } catch (error) {
+      console.log("Error");
+    }
+  };
 
   return (
     <div>
@@ -173,19 +217,26 @@ const PostSection = ({ post }) => {
             <Modal.Title>Edit Post</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form onSubmit={""}>
+            <form onSubmit={fetchEditPost}>
               <textarea
                 rows={4}
                 className="w-100"
                 placeholder="What do you want to talk about?"
                 style={{ border: "none", borderRadius: "10px" }}
-                value={""}
-                onChange={(e) => ({})}
+                value={editPost.text}
+                onChange={(e) =>
+                  setEditPost({ editPost, text: e.target.value })
+                }
               />
-              <Button variant="secondary" onClick={handleClose2}>
-                Delete Post
+              <Button variant="danger" onClick={deletePost}>
+                <AiFillDelete />
               </Button>
-              <Button variant="primary" onClick={handleClose2} type="submit">
+              <Button
+                variant="primary"
+                onClick={handleClose2}
+                type="submit"
+                className="float-right"
+              >
                 Edit Post
               </Button>
             </form>

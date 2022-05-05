@@ -1,16 +1,16 @@
-import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { parseISO, format } from "date-fns"
-import { BiPencil } from "react-icons/bi"
-import { AiFillDelete } from "react-icons/ai"
-import { useState } from "react"
+import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { parseISO, format } from "date-fns";
+import { BiPencil } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { useState } from "react";
 
 const SingleExperience = ({ experience }) => {
-  const [formData, setFormData] = useState(experience)
-  const [show, setShow] = useState(false)
+  const [formData, setFormData] = useState(experience);
+  const [show, setShow] = useState(false);
   const editExperience = async (e, _id) => {
-    console.log("here is ID", _id)
-    e.preventDefault()
+    console.log("here is ID", _id);
+    e.preventDefault();
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
@@ -24,13 +24,13 @@ const SingleExperience = ({ experience }) => {
             "Content-Type": "application/json",
           },
         }
-      )
-      console.log(response)
-      setShow(false)
+      );
+      console.log(response);
+      setShow(false);
     } catch (error) {
-      alert("error", error)
+      alert("error", error);
     }
-  }
+  };
 
   const handleDelete = async () => {
     try {
@@ -46,14 +46,14 @@ const SingleExperience = ({ experience }) => {
             "Content-Type": "application/json",
           },
         }
-      )
+      );
       if (response.ok) {
-        alert("Deleted Succesfully")
+        alert("Deleted Succesfully");
       }
     } catch (error) {
-      console.log("Error")
+      console.log("Error");
     }
-  }
+  };
 
   return (
     <>
@@ -217,7 +217,7 @@ const SingleExperience = ({ experience }) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default SingleExperience
+export default SingleExperience;

@@ -8,11 +8,18 @@ import MyExperience from "./MyExperience";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState("");
+  const [showImage, setShowImage] = useState({
+    profile: "",
+  });
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   const [profileFormData, setProfileFormData] = useState({
     name: "",
@@ -60,6 +67,27 @@ const MyProfile = () => {
     console.log(response);
     setShow(false);
   };
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/picture",
+        {
+          method: "POST",
+          body: JSON.stringify(showImage),
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Image Uploaded Successfully");
+      }
+    } catch (error) {}
+  };
   return (
     <>
       <Wrapper>
@@ -76,7 +104,12 @@ const MyProfile = () => {
           </Container>
         </Header>
         <AvatarLogo>
-          <img className="jumbotron-img" src={profile.image} alt="avatar" />
+          <img
+            className="jumbotron-img"
+            src={profile.image}
+            alt="avatar"
+            onClick={handleShow2}
+          />
         </AvatarLogo>
         <Body>
           <Container>
@@ -268,6 +301,33 @@ const MyProfile = () => {
           </Form>
         </Modal.Body>
       </Modal>
+      <>
+        <Modal show={show2} onHide={handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Upload Image</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={uploadImage}>
+              <input
+                type="file"
+                alt="submit"
+                value={showImage.profile}
+                onChange={(e) =>
+                  setShowImage({ showImage, profile: e.target.value })
+                }
+              />
+              <Button
+                variant="primary"
+                onClick={handleClose2}
+                type="submit"
+                className="float-right"
+              >
+                Post Image
+              </Button>
+            </form>
+          </Modal.Body>
+        </Modal>
+      </>
     </>
   );
 };
