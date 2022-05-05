@@ -1,25 +1,75 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import styled from "styled-components"
-import { AiFillLike, AiOutlineComment } from "react-icons/ai"
-import { BiLike } from "react-icons/bi"
-import { RiShareForwardLine, RiSendPlaneFill, RiMoreFill } from "react-icons/ri"
-import { FcLike } from "react-icons/fc"
-import { IoMdGlobe } from "react-icons/io"
-import TimeAgo from "javascript-time-ago"
-import ReactTimeAgo from "react-time-ago"
-import { useState } from "react"
-import { Modal, Container, Row, Col } from "react-bootstrap"
-import en from "javascript-time-ago/locale/en.json"
-import ru from "javascript-time-ago/locale/ru.json"
+import styled from "styled-components";
+import { AiFillLike, AiOutlineComment } from "react-icons/ai";
+import { BiLike } from "react-icons/bi";
+import {
+  RiShareForwardLine,
+  RiSendPlaneFill,
+  RiMoreFill,
+} from "react-icons/ri";
+import { FcLike } from "react-icons/fc";
+import { IoMdGlobe } from "react-icons/io";
+import TimeAgo from "javascript-time-ago";
+import ReactTimeAgo from "react-time-ago";
+import { useState } from "react";
+import { Modal, Container, Row, Col, Button } from "react-bootstrap";
+import en from "javascript-time-ago/locale/en.json";
+import { AiFillDelete } from "react-icons/ai";
 
-TimeAgo.addDefaultLocale(en)
-TimeAgo.addLocale(ru)
+TimeAgo.addDefaultLocale(en);
 
 const PostSection = ({ post }) => {
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
+  const [editPost, setEditPost] = useState(post);
+
+  const fetchEditPost = async (e) => {
+    e.preventDefault();
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
+      {
+        method: "PUT",
+        body: JSON.stringify(editPost),
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      alert("Post Edited Succesfully");
+    }
+  };
+
+  const deletePost = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
+        {
+          method: "DELETE",
+          body: JSON.stringify(editPost),
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Deleted Succesfully");
+      }
+    } catch (error) {
+      console.log("Error");
+    }
+  };
 
   return (
     <div>
@@ -40,7 +90,11 @@ const PostSection = ({ post }) => {
               </p>
               <IoMdGlobe size="1rem" className="text-muted " />
             </div>
-            <RiMoreFill size="1.2rem" className="float-right mb-5 text-mute" />
+            <RiMoreFill
+              size="1.2rem"
+              className="float-right mb-5 text-mute"
+              onClick={handleShow2}
+            />
           </Header>
           <Body>
             <p className="skeleton-text mb-2 skeleton">{post.text}</p>
@@ -83,9 +137,7 @@ const PostSection = ({ post }) => {
       </>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Container>
             <Row>
@@ -93,19 +145,109 @@ const PostSection = ({ post }) => {
                 <img src={post.user.image} alt="img" className="w-100" />
               </Col>
               <Col md={6}>
-                <h5 className=" text-truncate">
+                <Header>
+                  <img
+                    src={post.user.image}
+                    className="skeleton-profile-pic skeleton"
+                  />
+                  <div>
+                    <h6 className="skeleton-name skeleton font-weight-bold">
+                      {post.user.name} {post.user.surname}
+                    </h6>
+                    <p>{post.user.title}</p>
+                    <p className="d-inline mr-1 text-muted ">
+                      <ReactTimeAgo date={post.updatedAt} locale="en-US" />
+                    </p>
+                    <IoMdGlobe size="1rem" className="text-muted " />
+                  </div>
+                  <RiMoreFill
+                    size="1.2rem"
+                    className="float-right mb-5 text-mute"
+                  />
+                </Header>
+                {/* <h5 className=" text-truncate">
                   {post.text} - {post.user.bio}
-                </h5>
+                </h5> */}
+                <Body>
+                  <p className="skeleton-text mb-2 skeleton">{post.text}</p>
+                  <div>
+                    <span>
+                      <AiFillLike />
+                      <FcLike />
+                    </span>
+                    <span>45</span>
+                    <span>300 comments</span>
+                  </div>
+                </Body>
+
+                <Footer>
+                  {/* <Section> */}
+                  <BiLike />
+                  <div style={{ fontSize: "12px" }} className="mx-1">
+                    Like
+                  </div>
+                  {/* </Section> */}
+                  {/* <Section> */}
+                  <AiOutlineComment />
+                  <div style={{ fontSize: "12px" }} className="mx-1">
+                    Comment
+                  </div>
+                  {/* </Section>
+                  <Section> */}
+                  <RiShareForwardLine />
+                  <div style={{ fontSize: "12px" }} className="mx-1">
+                    Share
+                  </div>
+                  {/* </Section> */}
+                  {/* <Section className="text-truncate"> */}
+                  <RiSendPlaneFill />
+                  <div style={{ fontSize: "12px" }} className="mx-1">
+                    Send
+                  </div>
+                  {/* </Section> */}
+                </Footer>
               </Col>
             </Row>
           </Container>
         </Modal.Body>
       </Modal>
+      <>
+        <Modal show={show2} onHide={handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Post</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={fetchEditPost}>
+              <textarea
+                rows={4}
+                className="w-100"
+                placeholder="What do you want to talk about?"
+                style={{ border: "none", borderRadius: "10px" }}
+                value={editPost.text}
+                onChange={(e) =>
+                  setEditPost({ editPost, text: e.target.value })
+                }
+              />
+              <Button variant="danger" onClick={deletePost}>
+                <AiFillDelete />
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleClose2}
+                type="submit"
+                className="float-right"
+              >
+                Edit Post
+              </Button>
+            </form>
+          </Modal.Body>
+        </Modal>
+      </>
     </div>
-  )
-}
+  );
+};
 
-export default PostSection
+export default PostSection;
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -119,7 +261,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 const Header = styled.div`
   height: 3rem;
@@ -146,7 +288,7 @@ const Header = styled.div`
     }
     margin-right: auto;
   }
-`
+`;
 
 const Body = styled.div`
   margin-top: 1rem;
@@ -172,7 +314,7 @@ const Body = styled.div`
       margin-left: auto;
     }
   }
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -183,7 +325,7 @@ const Footer = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e6e6e6;
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -202,4 +344,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`
+`;
