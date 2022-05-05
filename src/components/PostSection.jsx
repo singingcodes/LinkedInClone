@@ -1,19 +1,23 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import styled from "styled-components"
-import { AiFillLike, AiOutlineComment } from "react-icons/ai"
-import { BiLike } from "react-icons/bi"
-import { RiShareForwardLine, RiSendPlaneFill, RiMoreFill } from "react-icons/ri"
-import { FcLike } from "react-icons/fc"
-import { IoMdGlobe } from "react-icons/io"
-import TimeAgo from "javascript-time-ago"
-import ReactTimeAgo from "react-time-ago"
+import styled from "styled-components";
+import { AiFillLike, AiOutlineComment } from "react-icons/ai";
+import { BiLike } from "react-icons/bi";
+import {
+  RiShareForwardLine,
+  RiSendPlaneFill,
+  RiMoreFill,
+} from "react-icons/ri";
+import { FcLike } from "react-icons/fc";
+import { IoMdGlobe } from "react-icons/io";
+import TimeAgo from "javascript-time-ago";
+import ReactTimeAgo from "react-time-ago";
 
-import en from "javascript-time-ago/locale/en.json"
-import ru from "javascript-time-ago/locale/ru.json"
+import en from "javascript-time-ago/locale/en.json";
+import ru from "javascript-time-ago/locale/ru.json";
 
-TimeAgo.addDefaultLocale(en)
-TimeAgo.addLocale(ru)
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 
 const PostSection = ({ post }) => {
   return (
@@ -31,17 +35,14 @@ const PostSection = ({ post }) => {
               </h6>
               <p>{post.user.title}</p>
               <p className="d-inline mr-1 text-muted ">
-                <ReactTimeAgo date={post.user.createdAt} locale="en-US" />
+                <ReactTimeAgo date={post.updatedAt} locale="en-US" />
               </p>
               <IoMdGlobe size="1rem" className="text-muted " />
             </div>
             <RiMoreFill size="1.2rem" className="float-right mb-5 text-mute" />
           </Header>
           <Body>
-            <p className="skeleton-text mb-2 skeleton">
-              {post.user.bio}
-              {post.text}
-            </p>
+            <p className="skeleton-text mb-2 skeleton">{post.text}</p>
 
             <img src={post.user.image} alt="cat pic" className="mb-4 w-100" />
             <div>
@@ -75,10 +76,10 @@ const PostSection = ({ post }) => {
         </Wrapper>
       </>
     </div>
-  )
-}
+  );
+};
 
-export default PostSection
+export default PostSection;
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -92,7 +93,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 const Header = styled.div`
   height: 3rem;
@@ -119,7 +120,7 @@ const Header = styled.div`
     }
     margin-right: auto;
   }
-`
+`;
 
 const Body = styled.div`
   margin-top: 1rem;
@@ -145,7 +146,7 @@ const Body = styled.div`
       margin-left: auto;
     }
   }
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -156,7 +157,7 @@ const Footer = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e6e6e6;
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -175,4 +176,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`
+`;
