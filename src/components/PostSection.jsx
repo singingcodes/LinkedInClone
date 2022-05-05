@@ -17,14 +17,9 @@ const PostSection = () => {
       <>
         <Wrapper>
           <Header>
-            <img
-              src="https://placekitten.com/100/100"
-              className="skeleton-profile-pic skeleton"
-            />
+            <img src="https://placekitten.com/100/100" />
             <div>
-              <h6 className="skeleton-name skeleton font-weight-bold">
-                James Arnold
-              </h6>
+              <h6 className=" font-weight-bold">James Arnold</h6>
               <p>500 followers</p>
               <p className="d-inline mr-1 text-muted ">5d. Edited .</p>
               <IoMdGlobe size="1rem" className="text-muted " />
@@ -32,7 +27,7 @@ const PostSection = () => {
             <RiMoreFill size="1.2rem" className="float-right mb-5" />
           </Header>
           <Body>
-            <p className="skeleton-text mb-2 skeleton">
+            <p className=" mb-2 ">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
               qui veritatis. Doloribus fugiat blanditiis nihil praesentium
               dolores earum accusamus quia dolorum repellat sint.
