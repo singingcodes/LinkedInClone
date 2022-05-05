@@ -8,9 +8,7 @@ import MyExperience from "./MyExperience";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState("");
-  const [showImage, setShowImage] = useState({
-    profile: "",
-  });
+  const [showImage, setShowImage] = useState(null);
 
   const [show, setShow] = useState(false);
 
@@ -40,7 +38,7 @@ const MyProfile = () => {
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
     );
@@ -60,7 +58,7 @@ const MyProfile = () => {
         headers: {
           "content-type": "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
     );
@@ -70,23 +68,26 @@ const MyProfile = () => {
 
   const uploadImage = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.append("profile", showImage);
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/picture",
         {
           method: "POST",
-          body: JSON.stringify(showImage),
+          body: data,
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
           },
         }
       );
       if (response.ok) {
         alert("Image Uploaded Successfully");
       }
-    } catch (error) {}
+    } catch (error) {
+      alert("error");
+    }
   };
   return (
     <>
@@ -117,7 +118,7 @@ const MyProfile = () => {
               <Col md={8}>
                 <div className="jumbotron-body">
                   <h3>
-                    {profile.name}
+                    {profile.name} {profile.surname}
                     <span className="text-muted ml-1">(Him/He)</span>
                   </h3>
                   <p>{profile.bio}</p>
@@ -310,11 +311,7 @@ const MyProfile = () => {
             <form onSubmit={uploadImage}>
               <input
                 type="file"
-                alt="submit"
-                value={showImage.profile}
-                onChange={(e) =>
-                  setShowImage({ showImage, profile: e.target.value })
-                }
+                onChange={(e) => setShowImage(e.target.files[0])}
               />
               <Button
                 variant="primary"

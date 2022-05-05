@@ -1,36 +1,40 @@
-import { Container, Row, Col } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { BsStarFill } from "react-icons/bs"
-import { FcKindle } from "react-icons/fc"
-import { useState, useEffect } from "react"
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { BsStarFill } from "react-icons/bs";
+import { FcKindle } from "react-icons/fc";
+import { useState, useEffect } from "react";
 
-import styled from "styled-components"
+import styled from "styled-components";
 
 const NewsFeedProfile = () => {
-  const [profile, setProfile] = useState("")
+  const [profile, setProfile] = useState("");
   useEffect(() => {
-    profileData()
-  }, [])
+    profileData();
+  }, []);
   const profileData = async () => {
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/profile/me",
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZThkZjE3YzRlMDAwMTVkN2EwODYiLCJpYXQiOjE2NTE1MDEyODAsImV4cCI6MTY1MjcxMDg4MH0.BHHzfw3iAtpCQMfwrq8GQMzEPn91MUE6-VDBzBtHR_I",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    )
-    let profileData = await response.json()
+    );
+    let profileData = await response.json();
     // console.log(profileData);
-    setProfile(profileData)
-  }
+    setProfile(profileData);
+  };
   return (
     <>
       <Wrapper>
         <Header></Header>
         <AvatarLogo>
-          <img className="jumbotron-img" src={profile.image} alt="avatar" />
+          <img
+            className="jumbotron-img h-100 "
+            src={profile.image}
+            alt="avatar"
+          />
         </AvatarLogo>
         <Body>
           <Container>
@@ -97,10 +101,10 @@ const NewsFeedProfile = () => {
         </Container>
       </Section>
     </>
-  )
-}
+  );
+};
 
-export default NewsFeedProfile
+export default NewsFeedProfile;
 const Wrapper = styled.div`
   position: relative;
   ${"" /* min-height: 65vh; */}
@@ -108,7 +112,7 @@ const Wrapper = styled.div`
   border: 0.1px solid #e0dfdc;
   border-radius: 15px;
   overflow: hidden;
-`
+`;
 
 const Header = styled.div`
   min-height: 5rem;
@@ -116,29 +120,29 @@ const Header = styled.div`
   background-image: url("https://images.unsplash.com/photo-1616763355548-1b606f439f86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29yayUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60");
   background-size: cover;
   border-radius: 10px 10px 0px 0px;
-`
+`;
 
 const Body = styled.div`
   background-color: white;
   margin-top: 50px;
   padding-left: 10px;
   padding-right: 10px;
-`
+`;
 
 const AvatarLogo = styled.div`
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   ${"" /* margin-top: -3.2rem; */}
   margin-left: 8rem;
   overflow: hidden;
   transform: translate(-50%, -50%);
-`
+`;
 const Section = styled.div`
   background-color: rgb(255, 255, 255);
   border: 0.1px solid #e0dfdc;
   border-radius: 15px;
   overflow: hidden;
   margin-top: 10px;
-`
+`;
