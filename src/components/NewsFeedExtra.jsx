@@ -1,13 +1,13 @@
-import { Card, Row, Col, Image, Button } from "react-bootstrap"
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 //this is the news feed extra component that appears on the news feed page
 const NewsFeedExtra = () => {
-  const [profiles, setProfiles] = useState([])
+  const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     let response = await fetch(
@@ -18,11 +18,11 @@ const NewsFeedExtra = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    )
-    let responseData = await response.json()
+    );
+    let responseData = await response.json();
     // console.log(responseData)
-    setProfiles(responseData)
-  }
+    setProfiles(responseData);
+  };
 
   return (
     <>
@@ -179,10 +179,11 @@ const NewsFeedExtra = () => {
           <Row>
             <Col sm={3}>
               <Image
-                src="https://media-exp1.licdn.com/dms/image/C4D0EAQHZZxjfr82Rew/rightRail-logo-shrink_100_100/0/1650539501663?e=1651773600&v=beta&t=g8dZBohUNC0EugjwtRaxDaOrAESETQ4TV79bIB-_i8Q"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYpl6Xtyqrdny1jV5FnGBj0zvlqzjy6Bf7A&usqp=CAU"
                 rounded
                 alt="profile-picture"
-                height="45px"
+                height="40px"
+                width="50px"
               />
             </Col>
             <Col sm={8} className="p-0">
@@ -214,7 +215,7 @@ const NewsFeedExtra = () => {
         </Card.Body>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default NewsFeedExtra
+export default NewsFeedExtra;
