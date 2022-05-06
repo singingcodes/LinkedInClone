@@ -171,7 +171,9 @@ const PostSection = ({ post }) => {
           <Container>
             <Row>
               <Col md={6}>
-                <img src={post.user.image} alt="img" className="w-100" />
+                {post.image && (
+                  <img src={post.image} alt="img" className="w-100" />
+                )}
               </Col>
               <Col md={6}>
                 <Header>
