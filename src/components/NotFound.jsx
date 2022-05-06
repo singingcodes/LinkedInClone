@@ -1,3 +1,4 @@
+//this component is used to render the 404 page
 const NotFound = () => {
   return (
     <div className="not-found">

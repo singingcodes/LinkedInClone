@@ -1,3 +1,4 @@
+//This component displays the footer section of the application
 const MyFooter = () => {
   return (
     <footer className="footer">

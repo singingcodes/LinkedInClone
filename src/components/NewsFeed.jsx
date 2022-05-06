@@ -1,8 +1,8 @@
-import { Container, Row, Col } from "react-bootstrap";
-import NewsFeedExtra from "./NewsFeedExtra";
-import NewsFeedPost from "./NewsFeedPost";
-import NewsFeedProfile from "./NewsFeedProfile";
-
+import { Container, Row, Col } from "react-bootstrap"
+import NewsFeedExtra from "./NewsFeedExtra"
+import NewsFeedPost from "./NewsFeedPost"
+import NewsFeedProfile from "./NewsFeedProfile"
+//this is the news feed component
 const NewsFeed = () => {
   return (
     <>
@@ -20,7 +20,7 @@ const NewsFeed = () => {
         </Row>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default NewsFeed;
+export default NewsFeed

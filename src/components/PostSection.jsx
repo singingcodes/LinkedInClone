@@ -1,37 +1,41 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import styled from "styled-components";
-import { AiFillLike, AiOutlineComment } from "react-icons/ai";
-import { BiLike } from "react-icons/bi";
-import {
-  RiShareForwardLine,
-  RiSendPlaneFill,
-  RiMoreFill,
-} from "react-icons/ri";
-import { FcLike } from "react-icons/fc";
-import { IoMdGlobe } from "react-icons/io";
-import TimeAgo from "javascript-time-ago";
-import ReactTimeAgo from "react-time-ago";
-import { useState } from "react";
-import { Modal, Container, Row, Col, Button } from "react-bootstrap";
-import en from "javascript-time-ago/locale/en.json";
-import { AiFillDelete } from "react-icons/ai";
+import styled from "styled-components"
+import { AiFillLike, AiOutlineComment } from "react-icons/ai"
+import { BiLike } from "react-icons/bi"
+import { RiShareForwardLine, RiSendPlaneFill, RiMoreFill } from "react-icons/ri"
+import { FcLike } from "react-icons/fc"
+import { IoMdGlobe } from "react-icons/io"
+import TimeAgo from "javascript-time-ago"
+import ReactTimeAgo from "react-time-ago"
+import { useState } from "react"
+import { Modal, Container, Row, Col, Button } from "react-bootstrap"
+import en from "javascript-time-ago/locale/en.json"
+import { AiFillDelete } from "react-icons/ai"
 
-TimeAgo.addDefaultLocale(en);
+import { FcStackOfPhotos } from "react-icons/fc"
+
+TimeAgo.addDefaultLocale(en)
+
+// this component handles a single news feed post
 
 const PostSection = ({ post }) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+  const [show2, setShow2] = useState(false)
+  const handleClose2 = () => setShow2(false)
+  const handleShow2 = () => setShow2(true)
+  const [show3, setShow3] = useState(false)
+  const handleClose3 = () => setShow3(false)
+  const handleShow3 = () => setShow3(true)
+  const [showPostImage, setShowPostImage] = useState(null)
 
-  const [editPost, setEditPost] = useState(post);
+  const [editPost, setEditPost] = useState(post)
 
   const fetchEditPost = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
       {
@@ -43,12 +47,32 @@ const PostSection = ({ post }) => {
           "Content-Type": "application/json",
         },
       }
-    );
+    )
     if (response.ok) {
-      alert("Post Edited Succesfully");
+      alert("Post Edited Succesfully")
     }
-  };
-
+  }
+  //this function handles post image upload
+  const addPostImage = async (e) => {
+    e.preventDefault()
+    const dataImage = new FormData()
+    dataImage.append("post", showPostImage)
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
+      {
+        method: "POST",
+        body: dataImage,
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+        },
+      }
+    )
+    if (response.ok) {
+      alert("Image Uploaded Successfully")
+    }
+  }
+  //this function handles delete post
   const deletePost = async () => {
     try {
       let response = await fetch(
@@ -62,14 +86,14 @@ const PostSection = ({ post }) => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
       if (response.ok) {
-        alert("Deleted Succesfully");
+        alert("Deleted Succesfully")
       }
     } catch (error) {
-      console.log("Error");
+      console.log("Error")
     }
-  };
+  }
 
   return (
     <div>
@@ -86,7 +110,10 @@ const PostSection = ({ post }) => {
               </h6>
               <p>{post.user.title}</p>
               <p className="d-inline mr-1 text-muted ">
-                <ReactTimeAgo date={post.updatedAt} locale="en-US" />
+                <ReactTimeAgo
+                  date={Date.parse(post.updatedAt)}
+                  locale="en-US"
+                />
               </p>
               <IoMdGlobe size="1rem" className="text-muted " />
             </div>
@@ -99,12 +126,14 @@ const PostSection = ({ post }) => {
           <Body>
             <p className="skeleton-text mb-2 skeleton">{post.text}</p>
 
-            <img
-              src={post.user.image}
-              alt="cat pic"
-              className="mb-4 w-100"
-              onClick={handleShow}
-            />
+            {post.image && (
+              <img
+                src={post.image}
+                alt="cat pic"
+                className="mb-4 w-100"
+                onClick={handleShow}
+              />
+            )}
             <div>
               <span>
                 <AiFillLike />
@@ -212,6 +241,7 @@ const PostSection = ({ post }) => {
         </Modal.Body>
       </Modal>
       <>
+        {/* this is the edit post modal */}
         <Modal show={show2} onHide={handleClose2}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Post</Modal.Title>
@@ -231,6 +261,11 @@ const PostSection = ({ post }) => {
               <Button variant="danger" onClick={deletePost}>
                 <AiFillDelete />
               </Button>
+              <span className="mx-5">
+                <FcStackOfPhotos size="1.5rem" onClick={handleShow3} />
+                <span className="ml-2">Add Photo</span>
+              </span>
+
               <Button
                 variant="primary"
                 onClick={handleClose2}
@@ -242,12 +277,34 @@ const PostSection = ({ post }) => {
             </form>
           </Modal.Body>
         </Modal>
+        {/* this is the image upload modal */}
+        <Modal show={show3} onHide={handleClose3}>
+          <Modal.Header closeButton>
+            <Modal.Title>Upload Image</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={addPostImage}>
+              <input
+                type="file"
+                onChange={(e) => setShowPostImage(e.target.files[0])}
+              />
+              <Button
+                variant="primary"
+                onClick={handleClose3}
+                type="submit"
+                className="float-right"
+              >
+                Post Image
+              </Button>
+            </form>
+          </Modal.Body>
+        </Modal>
       </>
     </div>
-  );
-};
+  )
+}
 
-export default PostSection;
+export default PostSection
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -261,7 +318,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 
 const Header = styled.div`
   height: 3rem;
@@ -288,7 +345,7 @@ const Header = styled.div`
     }
     margin-right: auto;
   }
-`;
+`
 
 const Body = styled.div`
   margin-top: 1rem;
@@ -314,7 +371,7 @@ const Body = styled.div`
       margin-left: auto;
     }
   }
-`;
+`
 
 const Footer = styled.div`
   display: flex;
@@ -325,7 +382,7 @@ const Footer = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e6e6e6;
-`;
+`
 
 const Section = styled.div`
   cursor: pointer;
@@ -344,4 +401,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`;
+`

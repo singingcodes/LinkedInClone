@@ -1,7 +1,8 @@
 import { Card, Row, Col, Image, Button } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-
+//This is the component that appears on the side bar and also displays the details of the available users,
+//it is also used to display the details of the user that the user clicks on
 const MySideBar = () => {
   const [profiles, setProfiles] = useState([])
 

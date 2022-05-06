@@ -1,10 +1,11 @@
 import { Card, Modal, Form, Button } from "react-bootstrap"
-
 import styled from "styled-components"
 import { useState, useEffect } from "react"
-
 import { BiPlus } from "react-icons/bi"
 import SingleExperience from "./SingleExperience"
+
+//This component is displays the user experience details, the user can add new experience details,
+// the user can edit and delete the experience details, the user can also add new experience image
 
 const MyExperience = () => {
   const [experiences, setExperiences] = useState([])

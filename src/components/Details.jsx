@@ -8,10 +8,11 @@ import { useParams } from "react-router-dom"
 import MySideBar from "./MySideBar"
 import MyExperience from "./MyExperience"
 
+//This component is displays details of the  profile the user clicks on
+
 const Details = () => {
   const [profile, setProfile] = useState("")
   const params = useParams()
-  // const [experiences, setUserExperiences] = useState([])
 
   useEffect(() => {
     profileData()
@@ -30,25 +31,9 @@ const Details = () => {
       }
     )
     let profileData = await response.json()
-    // console.log(profileData);
+
     setProfile(profileData)
   }
-  // const fetchUserExperience = async () => {
-  //   let response = await fetch(
-  //     "https://striveschool-api.herokuapp.com/api/profile/" +
-  //       params.Id +
-  //       "/experiences",
-  //     {
-  //       headers: {
-  //         Authorization:
-  //           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-  //       },
-  //     }
-  //   )
-  //   let responseData = await response.json()
-  //   console.log("user experience data is", responseData)
-  //   setUserExperiences(responseData)
-  // }
 
   return (
     <>
@@ -100,18 +85,7 @@ const Details = () => {
                         </p>
                       </div>
                     </Col>
-                    <Col md={4}>
-                      {/* <div className=" d-flex justify-content-end mb-3 text-muted">
-                  <BiPencil size="1.5rem" onClick={handleShow} />
-                </div> */}
-                      <h6>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit.
-                      </h6>
-                      <p>
-                        Facilis odit mollitia aliquam harum corporis quibusdam
-                      </p>
-                    </Col>
+                    <Col md={4}>{/* <h6>{profile.bio}</h6> */}</Col>
                   </Row>
                   <ButtonsClick className="mb-3">
                     <button className="jumbotron-btn mr-2  rounded-pill bg-primary text-white text-center px-4 py-2">

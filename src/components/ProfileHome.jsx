@@ -1,9 +1,9 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap"
 
-import MySideBar from "./MySideBar";
+import MySideBar from "./MySideBar"
 
-import MyProfile from "./MyProfile";
-
+import MyProfile from "./MyProfile"
+//this component renders the profile of the user
 const ProfileHome = () => {
   return (
     <Container className="my-3">
@@ -16,6 +16,6 @@ const ProfileHome = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
-export default ProfileHome;
+  )
+}
+export default ProfileHome

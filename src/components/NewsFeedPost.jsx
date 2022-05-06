@@ -1,23 +1,25 @@
-import styled from "styled-components";
-import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc";
-import PostSection from "./PostSection";
-import { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import styled from "styled-components"
+import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc"
+import PostSection from "./PostSection"
+import { useState, useEffect } from "react"
+import { Modal, Button } from "react-bootstrap"
+import Loading from "./Loading"
 
+//this is the component that displays news feed posts, it allows the user to add new post,edit and delete the post
 const NewsFeedPost = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const [sendPost, setSendPost] = useState({
     text: "",
-  });
+  })
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
   useEffect(() => {
-    getPost();
-  }, []);
+    getPost()
+  }, [])
 
   const getPost = async () => {
     let response = await fetch(
@@ -28,14 +30,15 @@ const NewsFeedPost = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
         },
       }
-    );
-    let postData = await response.json();
-    console.log(postData);
-    setPosts(postData);
-  };
+    )
+    let postData = await response.json()
+    // console.log(postData)
+    setPosts(postData)
+    setIsLoading(false)
+  }
 
   const handlePost = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       let response = await fetch(
@@ -49,22 +52,22 @@ const NewsFeedPost = () => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
       if (response.ok) {
-        let postData = await response.json();
-        console.log(postData);
-        alert("success");
-        setShow(false);
+        let postData = await response.json()
+        console.log(postData)
+        alert("success")
+        setShow(false)
         setSendPost({
           text: "",
-        });
+        })
       } else {
-        alert("error else");
+        alert("error else")
       }
     } catch (error) {
-      alert("error");
+      alert("error")
     }
-  };
+  }
 
   return (
     <>
@@ -78,6 +81,7 @@ const NewsFeedPost = () => {
         </Header>
         <Footer>
           <Section>
+            {/* Onclick to upload image */}
             <FcStackOfPhotos size="1.5rem" />
             <span className="ml-2">Photo</span>
           </Section>
@@ -103,6 +107,7 @@ const NewsFeedPost = () => {
       </Wrapper>
 
       <hr />
+      {isLoading && <Loading />}
       {posts
         .splice(-12)
         .reverse()
@@ -139,10 +144,10 @@ const NewsFeedPost = () => {
         </Modal.Body>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default NewsFeedPost;
+export default NewsFeedPost
 
 const Wrapper = styled.div`
   padding: 1rem 1rem;
@@ -151,7 +156,7 @@ const Wrapper = styled.div`
   border: 1px solid #e6e6e6;
   background-color: white;
   margin-bottom: 1rem;
-`;
+`
 
 const Header = styled.div`
   height: 3rem;
@@ -164,7 +169,7 @@ const Header = styled.div`
     border-radius: 50%;
     margin-right: 1rem;
   }
-`;
+`
 
 const Input = styled.input`
   flex-grow: 1;
@@ -172,7 +177,7 @@ const Input = styled.input`
   border-radius: 25px;
   border: 1px solid #adadad;
   padding: 0 1rem;
-`;
+`
 
 const Footer = styled.div`
   display: flex;
@@ -181,7 +186,7 @@ const Footer = styled.div`
   height: 3rem;
   width: 100%;
   margin-top: 1rem;
-`;
+`
 
 const Section = styled.div`
   cursor: pointer;
@@ -200,4 +205,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`;
+`

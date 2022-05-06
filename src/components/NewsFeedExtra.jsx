@@ -1,7 +1,7 @@
 import { Card, Row, Col, Image, Button } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-
+//this is the news feed extra component that appears on the news feed page
 const NewsFeedExtra = () => {
   const [profiles, setProfiles] = useState([])
 
@@ -20,7 +20,7 @@ const NewsFeedExtra = () => {
       }
     )
     let responseData = await response.json()
-    console.log(responseData)
+    // console.log(responseData)
     setProfiles(responseData)
   }
 

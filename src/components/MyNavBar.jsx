@@ -7,11 +7,12 @@ import {
   Form,
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
+//this is the navbar that is used in the ProfileHome component
 const MyNavBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
       <Container>
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/feed">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuRALyVA0K3z9C2yeZhRpUG7LGbVzLJD8ZmcZReeui69NRx2xonJ3JR5MhTfdFdE-NFSE&usqp=CAU"
             alt="logo"
@@ -44,8 +45,8 @@ const MyNavBar = () => {
           </Nav>
           <Nav>
             <Link to="/feed" className="nav-link">
-              <div className="nav-network">
-                <i className="bi bi-house-door-fill text-muted"></i>
+              <div className="nav-network ">
+                <i className="bi bi-house-door-fill text-muted "></i>
               </div>
               <p className="m-0">Home</p>
             </Link>
@@ -76,17 +77,13 @@ const MyNavBar = () => {
 
               <p className="m-0">Notifications</p>
             </Nav.Link>
-            <Nav.Link href="#">
+            <Link to="/" className="nav-link">
               <div className="nav-network">
                 <i className="bi bi-person-circle text-muted"></i>
               </div>
 
               <p className="m-0">Me</p>
-            </Nav.Link>
-
-            {/* <Nav.Link href="#">
-              <hr width="1" size="100" style={{ color: "#000" }} />
-            </Nav.Link> */}
+            </Link>
 
             <Nav.Link id="meme" href="#memes">
               <div className="nav-network">
@@ -94,9 +91,9 @@ const MyNavBar = () => {
               </div>
               <p className="m-0">Work</p>
             </Nav.Link>
-            <Nav.Link href="#memes">
+            <Link to="/premium" className="nav-link">
               Reactivate <br /> Premium{" "}
-            </Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

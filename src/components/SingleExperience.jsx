@@ -1,24 +1,26 @@
-import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { parseISO, format } from "date-fns";
-import { BiPencil } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { useState } from "react";
+import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { parseISO, format } from "date-fns"
+import { BiPencil } from "react-icons/bi"
+import { AiFillDelete } from "react-icons/ai"
+import { useState } from "react"
+
+// this component displays a single experience
 
 const SingleExperience = ({ experience }) => {
-  const [formData, setFormData] = useState(experience);
+  const [formData, setFormData] = useState(experience)
 
-  const [showExpImage, setShowExpImage] = useState(null);
+  const [showExpImage, setShowExpImage] = useState(null)
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+  const [show2, setShow2] = useState(false)
+  const handleClose2 = () => setShow2(false)
+  const handleShow2 = () => setShow2(true)
 
   const editExperience = async (e, _id) => {
-    console.log("here is ID", _id);
-    e.preventDefault();
+    console.log("here is ID", _id)
+    e.preventDefault()
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
@@ -32,19 +34,19 @@ const SingleExperience = ({ experience }) => {
             "Content-Type": "application/json",
           },
         }
-      );
-      console.log(response);
-      setShow(false);
+      )
+      console.log(response)
+      setShow(false)
     } catch (error) {
-      alert("error", error);
+      alert("error", error)
     }
-  };
+  }
 
   const addExpPicture = async (e, _id) => {
-    console.log("here is ID", _id);
-    e.preventDefault();
-    const dataExp = new FormData();
-    dataExp.append("experience", showExpImage);
+    console.log("here is ID", _id)
+    e.preventDefault()
+    const dataExp = new FormData()
+    dataExp.append("experience", showExpImage)
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
@@ -58,14 +60,14 @@ const SingleExperience = ({ experience }) => {
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
           },
         }
-      );
+      )
       if (response.ok) {
-        alert("Image Uploaded Successfully");
+        alert("Image Uploaded Successfully")
       }
     } catch (error) {
-      alert("error", error);
+      alert("error", error)
     }
-  };
+  }
 
   const handleDelete = async () => {
     try {
@@ -81,14 +83,14 @@ const SingleExperience = ({ experience }) => {
             "Content-Type": "application/json",
           },
         }
-      );
+      )
       if (response.ok) {
-        alert("Deleted Succesfully");
+        alert("Deleted Succesfully")
       }
     } catch (error) {
-      console.log("Error");
+      console.log("Error")
     }
-  };
+  }
 
   return (
     <>
@@ -274,7 +276,7 @@ const SingleExperience = ({ experience }) => {
         </Modal.Body>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default SingleExperience;
+export default SingleExperience
