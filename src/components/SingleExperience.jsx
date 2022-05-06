@@ -7,7 +7,15 @@ import { useState } from "react";
 
 const SingleExperience = ({ experience }) => {
   const [formData, setFormData] = useState(experience);
+
+  const [showExpImage, setShowExpImage] = useState(null);
+
   const [show, setShow] = useState(false);
+
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
   const editExperience = async (e, _id) => {
     console.log("here is ID", _id);
     e.preventDefault();
@@ -27,6 +35,33 @@ const SingleExperience = ({ experience }) => {
       );
       console.log(response);
       setShow(false);
+    } catch (error) {
+      alert("error", error);
+    }
+  };
+
+  const addExpPicture = async (e, _id) => {
+    console.log("here is ID", _id);
+    e.preventDefault();
+    const dataExp = new FormData();
+    dataExp.append("experience", showExpImage);
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
+          experience._id +
+          "/picture",
+        {
+          method: "POST",
+          body: dataExp,
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Image Uploaded Successfully");
+      }
     } catch (error) {
       alert("error", error);
     }
@@ -62,10 +97,11 @@ const SingleExperience = ({ experience }) => {
           <div>
             <Link to={""}>
               <Image
-                src="/assests/profile-picture.png"
+                src={experience.image}
                 rounded
                 alt="profile-picture"
-                height="58px"
+                height="40 px"
+                onClick={handleShow2}
               />
             </Link>
           </div>
@@ -214,6 +250,27 @@ const SingleExperience = ({ experience }) => {
               Submit
             </Button>
           </Form>
+        </Modal.Body>
+      </Modal>
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Image</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={addExpPicture}>
+            <input
+              type="file"
+              onChange={(e) => setShowExpImage(e.target.files[0])}
+            />
+            <Button
+              variant="primary"
+              onClick={handleClose2}
+              type="submit"
+              className="float-right"
+            >
+              Post Image
+            </Button>
+          </form>
         </Modal.Body>
       </Modal>
     </>
