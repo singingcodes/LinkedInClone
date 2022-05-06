@@ -46,6 +46,8 @@ const PostSection = ({ post }) => {
     );
     if (response.ok) {
       alert("Post Edited Succesfully");
+    } else {
+      alert("Error Occured");
     }
   };
 
@@ -67,7 +69,7 @@ const PostSection = ({ post }) => {
         alert("Deleted Succesfully");
       }
     } catch (error) {
-      console.log("Error");
+      alert("Error");
     }
   };
 
