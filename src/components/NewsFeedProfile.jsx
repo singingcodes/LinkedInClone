@@ -79,7 +79,7 @@ const NewsFeedProfile = () => {
         </Body>
       </Wrapper>
 
-      <Section>
+      <Section className="sticky-top">
         <Container>
           <Row>
             <Col>

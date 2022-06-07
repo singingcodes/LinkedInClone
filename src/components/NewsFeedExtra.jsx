@@ -101,7 +101,7 @@ const NewsFeedExtra = () => {
 
       {/* people you may know starts here */}
 
-      <Card style={{ width: "18rem" }} className="mb-3">
+      <Card style={{ width: "18rem" }} className="mb-3 sticky-top">
         <Card.Body>
           <Card.Title className="font-weight-bold" style={{ fontSize: "16px" }}>
             Promoted <i className="bi bi-three-dots float-right"></i>
