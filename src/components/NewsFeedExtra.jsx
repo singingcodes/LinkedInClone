@@ -15,8 +15,8 @@ const NewsFeedExtra = () => {
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
     );
     let responseData = await response.json();
@@ -70,7 +70,7 @@ const NewsFeedExtra = () => {
                     style={{
                       borderRadius: "50px",
                       fontSize: "16px",
-                      width: "100px",
+                      width: "100px"
                     }}
                     variant="outline-dark"
                     className="font-weight-bold mb-2 text-muted p-1"
@@ -88,7 +88,7 @@ const NewsFeedExtra = () => {
               <h6
                 className="font-weight-bold m-0 text-muted"
                 style={{
-                  fontSize: "14px",
+                  fontSize: "14px"
                 }}
               >
                 {" "}

@@ -1,14 +1,14 @@
-import { Card, Modal, Form, Button } from "react-bootstrap"
-import styled from "styled-components"
-import { useState, useEffect } from "react"
-import { BiPlus } from "react-icons/bi"
-import SingleExperience from "./SingleExperience"
+import { Card, Modal, Form, Button } from "react-bootstrap";
+import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { BiPlus } from "react-icons/bi";
+import SingleExperience from "./SingleExperience";
 
 //This component is displays the user experience details, the user can add new experience details,
 // the user can edit and delete the experience details, the user can also add new experience image
 
 const MyExperience = () => {
-  const [experiences, setExperiences] = useState([])
+  const [experiences, setExperiences] = useState([]);
 
   const [addExperience, setAddExperience] = useState({
     role: "",
@@ -16,17 +16,17 @@ const MyExperience = () => {
     startDate: "",
     endDate: "",
     description: "",
-    area: "",
-  })
+    area: ""
+  });
 
   useEffect(() => {
-    fetchExperience()
+    fetchExperience();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  }, []);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // this is the function that fetches user experience
   const fetchExperience = async () => {
@@ -35,17 +35,17 @@ const MyExperience = () => {
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
-    )
-    let responseData = await response.json()
-    console.log(responseData)
-    setExperiences(responseData)
-  }
+    );
+    let responseData = await response.json();
+    console.log(responseData);
+    setExperiences(responseData);
+  };
   // this is the function that handles the adding user experience
   const submitExperience = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences",
@@ -54,29 +54,29 @@ const MyExperience = () => {
           body: JSON.stringify({ ...addExperience }),
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4",
+            "Content-Type": "application/json"
+          }
         }
-      )
-      console.log(response)
+      );
+      console.log(response);
       if (response.ok) {
-        console.log(response)
-        alert("ok")
+        console.log(response);
+        alert("ok");
         setAddExperience({
           role: "",
           company: "",
           startDate: "",
           endDate: "",
-          area: "",
-        })
+          area: ""
+        });
       } else {
-        alert("error")
+        alert("error");
       }
     } catch (error) {
-      alert("error", error)
+      alert("error", error);
     }
-  }
+  };
 
   return (
     <>
@@ -132,7 +132,7 @@ const MyExperience = () => {
                 onChange={(e) =>
                   setAddExperience({
                     ...addExperience,
-                    company: e.target.value,
+                    company: e.target.value
                   })
                 }
               />
@@ -146,7 +146,7 @@ const MyExperience = () => {
                 onChange={(e) =>
                   setAddExperience({
                     ...addExperience,
-                    startDate: e.target.value,
+                    startDate: e.target.value
                   })
                 }
               />
@@ -160,7 +160,7 @@ const MyExperience = () => {
                 onChange={(e) =>
                   setAddExperience({
                     ...addExperience,
-                    endDate: e.target.value,
+                    endDate: e.target.value
                   })
                 }
               />
@@ -184,7 +184,7 @@ const MyExperience = () => {
                 onChange={(e) =>
                   setAddExperience({
                     ...addExperience,
-                    description: e.target.value,
+                    description: e.target.value
                   })
                 }
               />
@@ -196,14 +196,14 @@ const MyExperience = () => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default MyExperience
+export default MyExperience;
 const Wrapper = styled.div`
   position: relative;
   background-color: rgb(255, 255, 255);
   border: 0.1px solid #e0dfdc;
   border-radius: 15px;
   overflow: hidden;
-`
+`;

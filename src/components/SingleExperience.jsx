@@ -1,26 +1,26 @@
-import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { parseISO, format } from "date-fns"
-import { BiPencil } from "react-icons/bi"
-import { AiFillDelete } from "react-icons/ai"
-import { useState } from "react"
+import { Row, Image, Col, Modal, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { parseISO, format } from "date-fns";
+import { BiPencil } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { useState } from "react";
 
 // this component displays a single experience
 
 const SingleExperience = ({ experience }) => {
-  const [formData, setFormData] = useState(experience)
+  const [formData, setFormData] = useState(experience);
 
-  const [showExpImage, setShowExpImage] = useState(null)
+  const [showExpImage, setShowExpImage] = useState(null);
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
-  const [show2, setShow2] = useState(false)
-  const handleClose2 = () => setShow2(false)
-  const handleShow2 = () => setShow2(true)
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   const editExperience = async (e, _id) => {
-    console.log("here is ID", _id)
-    e.preventDefault()
+    console.log("here is ID", _id);
+    e.preventDefault();
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
@@ -30,23 +30,23 @@ const SingleExperience = ({ experience }) => {
           body: JSON.stringify(formData),
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4",
+            "Content-Type": "application/json"
+          }
         }
-      )
-      console.log(response)
-      setShow(false)
+      );
+      console.log(response);
+      setShow(false);
     } catch (error) {
-      alert("error", error)
+      alert("error", error);
     }
-  }
+  };
 
   const addExpPicture = async (e, _id) => {
-    console.log("here is ID", _id)
-    e.preventDefault()
-    const dataExp = new FormData()
-    dataExp.append("experience", showExpImage)
+    console.log("here is ID", _id);
+    e.preventDefault();
+    const dataExp = new FormData();
+    dataExp.append("experience", showExpImage);
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/experiences/" +
@@ -57,17 +57,17 @@ const SingleExperience = ({ experience }) => {
           body: dataExp,
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA"
+          }
         }
-      )
+      );
       if (response.ok) {
-        alert("Image Uploaded Successfully")
+        alert("Image Uploaded Successfully");
       }
     } catch (error) {
-      alert("error", error)
+      alert("error", error);
     }
-  }
+  };
 
   const handleDelete = async () => {
     try {
@@ -80,17 +80,17 @@ const SingleExperience = ({ experience }) => {
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
+            "Content-Type": "application/json"
+          }
         }
-      )
+      );
       if (response.ok) {
-        alert("Deleted Succesfully")
+        alert("Deleted Succesfully");
       }
     } catch (error) {
-      console.log("Error")
+      console.log("Error");
     }
-  }
+  };
 
   return (
     <>
@@ -170,7 +170,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    role: e.target.value,
+                    role: e.target.value
                   })
                 }
               />
@@ -184,7 +184,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    company: e.target.value,
+                    company: e.target.value
                   })
                 }
               />
@@ -198,7 +198,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    startDate: e.target.value,
+                    startDate: e.target.value
                   })
                 }
               />
@@ -212,7 +212,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    endDate: e.target.value,
+                    endDate: e.target.value
                   })
                 }
               />
@@ -226,7 +226,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    area: e.target.value,
+                    area: e.target.value
                   })
                 }
               />
@@ -239,7 +239,7 @@ const SingleExperience = ({ experience }) => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    description: e.target.value,
+                    description: e.target.value
                   })
                 }
               />
@@ -276,7 +276,7 @@ const SingleExperience = ({ experience }) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default SingleExperience
+export default SingleExperience;

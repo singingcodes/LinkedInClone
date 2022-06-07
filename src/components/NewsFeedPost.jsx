@@ -1,25 +1,25 @@
-import styled from "styled-components"
-import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc"
-import PostSection from "./PostSection"
-import { useState, useEffect } from "react"
-import { Modal, Button } from "react-bootstrap"
-import Loading from "./Loading"
+import styled from "styled-components";
+import { FcStackOfPhotos, FcVideoCall } from "react-icons/fc";
+import PostSection from "./PostSection";
+import { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
+import Loading from "./Loading";
 
 //this is the component that displays news feed posts, it allows the user to add new post,edit and delete the post
 const NewsFeedPost = () => {
-  const [show, setShow] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [sendPost, setSendPost] = useState({
-    text: "",
-  })
+    text: ""
+  });
 
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
-    getPost()
-  }, [])
+    getPost();
+  }, []);
 
   const getPost = async () => {
     let response = await fetch(
@@ -27,18 +27,18 @@ const NewsFeedPost = () => {
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
-    )
-    let postData = await response.json()
+    );
+    let postData = await response.json();
     // console.log(postData)
-    setPosts(postData)
-    setIsLoading(false)
-  }
+    setPosts(postData);
+    setIsLoading(false);
+  };
 
   const handlePost = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       let response = await fetch(
@@ -48,26 +48,28 @@ const NewsFeedPost = () => {
           body: JSON.stringify(sendPost),
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4",
+            "Content-Type": "application/json"
+          }
         }
-      )
+      );
       if (response.ok) {
-        let postData = await response.json()
-        console.log(postData)
-        alert("success")
-        setShow(false)
+        let postData = await response.json();
+        console.log(postData);
+        alert("success");
+        setShow(false);
         setSendPost({
-          text: "",
-        })
+          text: ""
+        });
       } else {
-        alert("error else")
+        alert("error else");
       }
     } catch (error) {
-      alert("error")
+      alert("error");
     }
-  }
+  };
+
+  const filterOutPost = posts.filter((post) => post.user !== null);
 
   return (
     <>
@@ -108,7 +110,7 @@ const NewsFeedPost = () => {
 
       <hr />
       {isLoading && <Loading />}
-      {posts
+      {filterOutPost
         .splice(-12)
         .reverse()
 
@@ -144,10 +146,10 @@ const NewsFeedPost = () => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default NewsFeedPost
+export default NewsFeedPost;
 
 const Wrapper = styled.div`
   padding: 1rem 1rem;
@@ -156,7 +158,7 @@ const Wrapper = styled.div`
   border: 1px solid #e6e6e6;
   background-color: white;
   margin-bottom: 1rem;
-`
+`;
 
 const Header = styled.div`
   height: 3rem;
@@ -169,7 +171,7 @@ const Header = styled.div`
     border-radius: 50%;
     margin-right: 1rem;
   }
-`
+`;
 
 const Input = styled.input`
   flex-grow: 1;
@@ -177,7 +179,7 @@ const Input = styled.input`
   border-radius: 25px;
   border: 1px solid #adadad;
   padding: 0 1rem;
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -186,7 +188,7 @@ const Footer = styled.div`
   height: 3rem;
   width: 100%;
   margin-top: 1rem;
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -205,4 +207,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`
+`;

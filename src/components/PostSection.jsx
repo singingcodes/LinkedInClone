@@ -1,41 +1,45 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import styled from "styled-components"
-import { AiFillLike, AiOutlineComment } from "react-icons/ai"
-import { BiLike } from "react-icons/bi"
-import { RiShareForwardLine, RiSendPlaneFill, RiMoreFill } from "react-icons/ri"
-import { FcLike } from "react-icons/fc"
-import { IoMdGlobe } from "react-icons/io"
-import TimeAgo from "javascript-time-ago"
-import ReactTimeAgo from "react-time-ago"
-import { useState } from "react"
-import { Modal, Container, Row, Col, Button } from "react-bootstrap"
-import en from "javascript-time-ago/locale/en.json"
-import { AiFillDelete } from "react-icons/ai"
+import styled from "styled-components";
+import { AiFillLike, AiOutlineComment } from "react-icons/ai";
+import { BiLike } from "react-icons/bi";
+import {
+  RiShareForwardLine,
+  RiSendPlaneFill,
+  RiMoreFill
+} from "react-icons/ri";
+import { FcLike } from "react-icons/fc";
+import { IoMdGlobe } from "react-icons/io";
+import TimeAgo from "javascript-time-ago";
+import ReactTimeAgo from "react-time-ago";
+import { useState } from "react";
+import { Modal, Container, Row, Col, Button } from "react-bootstrap";
+import en from "javascript-time-ago/locale/en.json";
+import { AiFillDelete } from "react-icons/ai";
 
-import { FcStackOfPhotos } from "react-icons/fc"
+import { FcStackOfPhotos } from "react-icons/fc";
 
-TimeAgo.addDefaultLocale(en)
+TimeAgo.addDefaultLocale(en);
 
 // this component handles a single news feed post
 
 const PostSection = ({ post }) => {
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  const [show2, setShow2] = useState(false)
-  const handleClose2 = () => setShow2(false)
-  const handleShow2 = () => setShow2(true)
-  const [show3, setShow3] = useState(false)
-  const handleClose3 = () => setShow3(false)
-  const handleShow3 = () => setShow3(true)
-  const [showPostImage, setShowPostImage] = useState(null)
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+  const [show3, setShow3] = useState(false);
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
+  const [showPostImage, setShowPostImage] = useState(null);
 
-  const [editPost, setEditPost] = useState(post)
+  const [editPost, setEditPost] = useState(post);
 
   const fetchEditPost = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
       {
@@ -43,20 +47,20 @@ const PostSection = ({ post }) => {
         body: JSON.stringify(editPost),
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-          "Content-Type": "application/json",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4",
+          "Content-Type": "application/json"
+        }
       }
-    )
+    );
     if (response.ok) {
-      alert("Post Edited Succesfully")
+      alert("Post Edited Succesfully");
     }
-  }
+  };
   //this function handles post image upload
   const addPostImage = async (e) => {
-    e.preventDefault()
-    const dataImage = new FormData()
-    dataImage.append("post", showPostImage)
+    e.preventDefault();
+    const dataImage = new FormData();
+    dataImage.append("post", showPostImage);
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/posts/" + post._id,
       {
@@ -64,14 +68,14 @@ const PostSection = ({ post }) => {
         body: dataImage,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
-    )
+    );
     if (response.ok) {
-      alert("Image Uploaded Successfully")
+      alert("Image Uploaded Successfully");
     }
-  }
+  };
   //this function handles delete post
   const deletePost = async () => {
     try {
@@ -82,18 +86,18 @@ const PostSection = ({ post }) => {
           body: JSON.stringify(editPost),
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-            "Content-Type": "application/json",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4",
+            "Content-Type": "application/json"
+          }
         }
-      )
+      );
       if (response.ok) {
-        alert("Deleted Succesfully")
+        alert("Deleted Succesfully");
       }
     } catch (error) {
-      console.log("Error")
+      console.log("Error");
     }
-  }
+  };
 
   return (
     <div>
@@ -303,10 +307,10 @@ const PostSection = ({ post }) => {
         </Modal>
       </>
     </div>
-  )
-}
+  );
+};
 
-export default PostSection
+export default PostSection;
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -320,7 +324,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 const Header = styled.div`
   height: 3rem;
@@ -347,7 +351,7 @@ const Header = styled.div`
     }
     margin-right: auto;
   }
-`
+`;
 
 const Body = styled.div`
   margin-top: 1rem;
@@ -373,7 +377,7 @@ const Body = styled.div`
       margin-left: auto;
     }
   }
-`
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -384,7 +388,7 @@ const Footer = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e6e6e6;
-`
+`;
 
 const Section = styled.div`
   cursor: pointer;
@@ -403,4 +407,4 @@ const Section = styled.div`
   &:hover {
     background-color: #dddddd;
   }
-`
+`;

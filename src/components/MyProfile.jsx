@@ -1,25 +1,25 @@
-import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap"
-import React from "react"
-import styled from "styled-components"
-import { BiPencil } from "react-icons/bi"
-import { IoClose } from "react-icons/io5"
-import { useState, useEffect } from "react"
-import MyExperience from "./MyExperience"
+import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
+import React from "react";
+import styled from "styled-components";
+import { BiPencil } from "react-icons/bi";
+import { IoClose } from "react-icons/io5";
+import { useState, useEffect } from "react";
+import MyExperience from "./MyExperience";
 
 //This component is displays details of the  profile details of the user
 
 const MyProfile = () => {
-  const [profile, setProfile] = useState("")
-  const [showImage, setShowImage] = useState(null)
+  const [profile, setProfile] = useState("");
+  const [showImage, setShowImage] = useState(null);
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  const [show2, setShow2] = useState(false)
-  const handleClose2 = () => setShow2(false)
-  const handleShow2 = () => setShow2(true)
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   const [profileFormData, setProfileFormData] = useState({
     name: "",
@@ -27,12 +27,12 @@ const MyProfile = () => {
     email: "",
     bio: "",
     title: "",
-    area: "",
-  })
+    area: ""
+  });
 
   useEffect(() => {
-    profileData()
-  }, [])
+    profileData();
+  }, []);
   //this is the function that fetches the profile details of the user
   const profileData = async () => {
     let response = await fetch(
@@ -40,19 +40,19 @@ const MyProfile = () => {
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
-    )
-    let profileData = await response.json()
+    );
+    let profileData = await response.json();
     //this is the state that handles the adding user profile details
-    setProfile(profileData)
+    setProfile(profileData);
     //this is the state that handles the editing of the profile details
-    setProfileFormData(profileData)
-  }
+    setProfileFormData(profileData);
+  };
   //this is the function that handles the editing of the profile details
   const editData = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/profile/",
       {
@@ -61,20 +61,20 @@ const MyProfile = () => {
         headers: {
           "content-type": "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+        }
       }
-    )
-    console.log(response)
-    setShow(false)
-  }
+    );
+    console.log(response);
+    setShow(false);
+  };
   //this is the function that handles the upload of user image
   const uploadImage = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     //this is the state that handles the uploading of the image, the FormData method is used to handle image upload
     //and append the image to the form
-    const data = new FormData()
-    data.append("profile", showImage)
+    const data = new FormData();
+    data.append("profile", showImage);
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/626fd65617c4e00015d7a083/picture",
@@ -83,17 +83,17 @@ const MyProfile = () => {
           body: data,
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmZDY1NjE3YzRlMDAwMTVkN2EwODMiLCJpYXQiOjE2NTE0OTY1MzUsImV4cCI6MTY1MjcwNjEzNX0.8KY63vz_cG51-fBlBKeyzC8NE1kgqbjKuVVMCqVTllA",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmYTk5NDJhMGU3YzAwMTUyYzQ4MWMiLCJpYXQiOjE2NTQ2MzA4MDUsImV4cCI6MTY1NTg0MDQwNX0.OVp2JLd0_Es7M18bEhhtQtak6V2R3zRVCRWNglktSw4"
+          }
         }
-      )
+      );
       if (response.ok) {
-        alert("Image Uploaded Successfully")
+        alert("Image Uploaded Successfully");
       }
     } catch (error) {
-      alert("error")
+      alert("error");
     }
-  }
+  };
   return (
     <>
       <Wrapper>
@@ -224,7 +224,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    name: e.target.value,
+                    name: e.target.value
                   })
                 }
               />
@@ -238,7 +238,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    surname: e.target.value,
+                    surname: e.target.value
                   })
                 }
               />
@@ -252,7 +252,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    email: e.target.value,
+                    email: e.target.value
                   })
                 }
               />
@@ -266,7 +266,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    bio: e.target.value,
+                    bio: e.target.value
                   })
                 }
               />
@@ -280,7 +280,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    title: e.target.value,
+                    title: e.target.value
                   })
                 }
               />
@@ -294,7 +294,7 @@ const MyProfile = () => {
                 onChange={(e) =>
                   setProfileFormData({
                     ...profileFormData,
-                    area: e.target.value,
+                    area: e.target.value
                   })
                 }
               />
@@ -329,10 +329,10 @@ const MyProfile = () => {
         </Modal>
       </>
     </>
-  )
-}
+  );
+};
 
-export default MyProfile
+export default MyProfile;
 
 const Wrapper = styled.div`
   position: relative;
@@ -341,7 +341,7 @@ const Wrapper = styled.div`
   border: 0.1px solid #e0dfdc;
   border-radius: 15px;
   overflow: hidden;
-`
+`;
 
 const Header = styled.div`
   min-height: 10rem;
@@ -349,14 +349,14 @@ const Header = styled.div`
   background-image: url("https://images.unsplash.com/photo-1616763355548-1b606f439f86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29yayUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60");
   background-size: cover;
   border-radius: 10px 10px 0px 0px;
-`
+`;
 
 const Body = styled.div`
   background-color: white;
   margin-top: 50px;
   padding-left: 10px;
   padding-right: 10px;
-`
+`;
 
 const AvatarLogo = styled.div`
   position: absolute;
@@ -366,9 +366,9 @@ const AvatarLogo = styled.div`
   margin-top: -6rem;
   margin-left: 1.5rem;
   overflow: hidden;
-`
+`;
 
 const ButtonsClick = styled.div`
   display: inline-flex;
   margin-right: 4.5rem;
-`
+`;
